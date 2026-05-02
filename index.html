@@ -680,12 +680,8 @@ button { cursor: pointer; font-family: var(--font); outline: none; border: none;
 .btn-filled-dark { background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2); }
 .btn-filled-dark:hover { background: rgba(255,255,255,0.2); }
 
-/* ════ STAT BAR ════ */
-/* Apple-style full-width stat strip between sections */
-.stat-bar {
-  background: #1d1d1f;
-  padding: 40px 24px;
-}
+/* ════ STAT BAR – Apple-style strip between hero and freebasic ════ */
+.stat-bar { background: #1d1d1f; padding: 40px 24px; }
 .stat-bar-inner {
   max-width: var(--max);
   margin: 0 auto;
@@ -697,11 +693,7 @@ button { cursor: pointer; font-family: var(--font); outline: none; border: none;
   overflow: hidden;
 }
 @media(max-width:960px){ .stat-bar-inner { grid-template-columns: repeat(2, 1fr); } }
-.stat-item {
-  background: #1d1d1f;
-  padding: 32px 24px;
-  text-align: center;
-}
+.stat-item { background: #1d1d1f; padding: 32px 24px; text-align: center; }
 .stat-n {
   font-size: clamp(36px, 5vw, 56px);
   font-weight: 700;
@@ -710,28 +702,9 @@ button { cursor: pointer; font-family: var(--font); outline: none; border: none;
   line-height: 1;
   display: block;
 }
-.stat-l {
-  font-size: 14px;
-  color: var(--c-gray3);
-  margin-top: 8px;
-  display: block;
-}
-.stat-num-row {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.18em;
-  font-size: clamp(36px, 5vw, 56px);
-  line-height: 1;
-}
-.stat-num-row .stat-n { font-size: inherit; display: inline; }
-.stat-icon {
-  width: calc(1em - 4px);
-  height: calc(1em - 4px);
-  flex-shrink: 0;
-  color: var(--c-amber);
-}
+.stat-l { font-size: 14px; color: var(--c-gray3); margin-top: 8px; display: block; }
 @media(max-width:600px){ .stat-bar-inner { grid-template-columns:1fr; } .stat-bar { padding: 56px 16px; } }
+@keyframes livePulse { 0%,100%{opacity:1} 50%{opacity:.35} }
 
 /* ════ SECTIONS ════ */
 section { padding: 120px 24px; }
@@ -904,25 +877,20 @@ section { padding: 120px 24px; }
 .how-sec { background: #f5f5f7; }
 .how-steps {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 0;
   margin-top: 72px;
   background: #fff;
   border-radius: 20px;
   overflow: hidden;
 }
-@media(max-width:1024px) {
-  .how-steps { grid-template-columns: repeat(2, 1fr); }
-  .how-step + .how-step { border-left: 1px solid rgba(0,0,0,0.06); }
-  .how-step:nth-child(2n+1) { border-left: none; }
-  .how-step:nth-child(n+3) { border-top: 1px solid rgba(0,0,0,0.06); }
-}
 .how-step {
   background: #fff;
-  padding: 52px 44px 48px;
+  padding: 36px 44px 32px;
   position: relative;
 }
-.how-step + .how-step { border-left: 1px solid rgba(0,0,0,0.06); }
+.how-step:nth-child(2n) { border-left: 1px solid rgba(0,0,0,0.06); }
+.how-step:nth-child(n+3) { border-top: 1px solid rgba(0,0,0,0.06); }
 .how-step-num {
   font-size: 64px;
   font-weight: 800;
@@ -952,7 +920,8 @@ section { padding: 120px 24px; }
 }
 @media(max-width:760px) {
   .how-steps { grid-template-columns: 1fr; margin-top: 18px; }
-  .how-step + .how-step { border-left: none; border-top: 1px solid rgba(0,0,0,0.06); }
+  .how-step:nth-child(2n) { border-left: none; }
+  .how-step + .how-step { border-top: 1px solid rgba(0,0,0,0.06); }
 }
 
 /* ════ SECTION 4: BONUS – Stripe-style modular bento (light, 7-in-1 Premium Bundle) ════ */
@@ -2133,78 +2102,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   isolation: isolate;
 }
 
-/* Animated mesh-gradient aurora – muted gold, slow, multi-hue */
-.hero--devin-v2 .aurora {
-  position: absolute; inset: -10%;
-  z-index: 0; pointer-events: none;
-  filter: blur(80px) saturate(1.2);
-  opacity: 0.55;
-}
-.hero--devin-v2 .aurora .blob {
-  position: absolute; border-radius: 50%;
-  mix-blend-mode: screen; will-change: transform, opacity;
-}
-.hero--devin-v2 .aurora .b1 { width: 55%; height: 60%; left: -8%; top: -12%;
-  background: radial-gradient(circle at center, #d4a04a 0%, transparent 65%);
-  animation: dvAuroraDrift1 22s ease-in-out infinite; }
-.hero--devin-v2 .aurora .b2 { width: 50%; height: 55%; right: -6%; top: -8%;
-  background: radial-gradient(circle at center, #f0c977 0%, transparent 65%);
-  animation: dvAuroraDrift2 26s ease-in-out infinite; }
-.hero--devin-v2 .aurora .b3 { width: 60%; height: 58%; left: 10%; bottom: -18%;
-  background: radial-gradient(circle at center, #8a6a32 0%, transparent 65%);
-  animation: dvAuroraDrift3 30s ease-in-out infinite; }
-.hero--devin-v2 .aurora .b4 { width: 45%; height: 50%; right: 5%; bottom: -10%;
-  background: radial-gradient(circle at center, #c97a4d 0%, transparent 65%);
-  animation: dvAuroraDrift4 34s ease-in-out infinite; }
-.hero--devin-v2 .aurora .b5 { width: 40%; height: 45%; left: 35%; top: 25%;
-  background: radial-gradient(circle at center, #b8924a 0%, transparent 65%);
-  animation: dvAuroraDrift5 28s ease-in-out infinite; }
-@keyframes dvAuroraDrift1 { 0%,100%{transform:translate(0,0)scale(1);opacity:.85} 33%{transform:translate(8%,6%)scale(1.12);opacity:1} 66%{transform:translate(-4%,10%)scale(.95);opacity:.7} }
-@keyframes dvAuroraDrift2 { 0%,100%{transform:translate(0,0)scale(1);opacity:.7} 50%{transform:translate(-10%,8%)scale(1.15);opacity:1} }
-@keyframes dvAuroraDrift3 { 0%,100%{transform:translate(0,0)scale(1);opacity:.75} 40%{transform:translate(6%,-8%)scale(1.1);opacity:1} 70%{transform:translate(-8%,-4%)scale(.92);opacity:.6} }
-@keyframes dvAuroraDrift4 { 0%,100%{transform:translate(0,0)scale(1);opacity:.6} 50%{transform:translate(-12%,-10%)scale(1.18);opacity:.95} }
-@keyframes dvAuroraDrift5 { 0%,100%{transform:translate(0,0)scale(.95);opacity:.55} 50%{transform:translate(8%,-6%)scale(1.1);opacity:.85} }
-
-/* Soft vignette + faint diagonal grid */
+/* Subtle vignette only – no aurora/sparks/floaters */
 .hero--devin-v2 .vignette {
   position: absolute; inset: 0; z-index: 1; pointer-events: none;
   background:
     radial-gradient(ellipse 80% 60% at 50% 50%, transparent 0%, rgba(2,4,12,0.55) 100%),
     linear-gradient(180deg, rgba(2,4,12,0.25) 0%, transparent 30%, transparent 70%, rgba(2,4,12,0.45) 100%);
 }
-.hero--devin-v2::before { content: none; }
-
-/* Floating gold sparks */
-.hero--devin-v2 .spark {
-  position: absolute; pointer-events: none; border-radius: 50%;
-  mix-blend-mode: screen; will-change: transform, opacity;
-  animation-timing-function: ease-in-out; animation-iteration-count: infinite;
-}
-.hero--devin-v2 .spark.s1 { left: 8%; top: 62%; width: 14px; height: 14px;
-  background: radial-gradient(circle at 50% 50%, #f4d28a 0%, rgba(244,210,138,.35) 35%, transparent 70%);
-  box-shadow: 0 0 24px 6px rgba(244,210,138,.45); z-index: 2;
-  animation-name: dvSpark1; animation-duration: 18s; }
-.hero--devin-v2 .spark.s2 { left: 78%; top: 18%; width: 10px; height: 10px;
-  background: radial-gradient(circle at 50% 50%, #e8b873 0%, rgba(232,184,115,.35) 35%, transparent 70%);
-  box-shadow: 0 0 20px 5px rgba(232,184,115,.4); z-index: 2;
-  animation-name: dvSpark2; animation-duration: 22s; }
-.hero--devin-v2 .spark.s3 { left: 22%; top: 78%; width: 7px; height: 7px;
-  background: radial-gradient(circle at 50% 50%, #fff0c8 0%, rgba(255,240,200,.4) 35%, transparent 70%);
-  box-shadow: 0 0 16px 4px rgba(255,240,200,.55); z-index: 60;
-  animation-name: dvSpark3; animation-duration: 26s; }
-.hero--devin-v2 .spark.s4 { left: 4%; top: 82%; width: 18px; height: 18px;
-  background: radial-gradient(circle at 50% 50%, #d4a04a 0%, rgba(212,160,74,.3) 35%, transparent 70%);
-  box-shadow: 0 0 28px 7px rgba(212,160,74,.4); z-index: 60;
-  animation-name: dvSpark4; animation-duration: 30s; }
-.hero--devin-v2 .spark.s5 { left: 88%; top: 70%; width: 8px; height: 8px;
-  background: radial-gradient(circle at 50% 50%, #ffe4a8 0%, rgba(255,228,168,.4) 35%, transparent 70%);
-  box-shadow: 0 0 18px 5px rgba(255,228,168,.5); z-index: 60;
-  animation-name: dvSpark5; animation-duration: 24s; }
-@keyframes dvSpark1 { 0%,100%{transform:translate(0,0);opacity:.7} 25%{transform:translate(40px,-30px);opacity:1} 50%{transform:translate(80px,10px);opacity:.5} 75%{transform:translate(20px,40px);opacity:.9} }
-@keyframes dvSpark2 { 0%,100%{transform:translate(0,0);opacity:.6} 33%{transform:translate(-50px,30px);opacity:1} 66%{transform:translate(20px,60px);opacity:.5} }
-@keyframes dvSpark3 { 0%,100%{transform:translate(0,0);opacity:.5} 25%{transform:translate(60px,-50px);opacity:1} 50%{transform:translate(120px,-20px);opacity:.7} 75%{transform:translate(80px,30px);opacity:.9} }
-@keyframes dvSpark4 { 0%,100%{transform:translate(0,0);opacity:.7} 50%{transform:translate(70px,-70px);opacity:1} }
-@keyframes dvSpark5 { 0%,100%{transform:translate(0,0);opacity:.6} 30%{transform:translate(-40px,-40px);opacity:1} 60%{transform:translate(-90px,-10px);opacity:.7} 90%{transform:translate(-30px,30px);opacity:.85} }
 
 /* Layout: 2-column */
 .hero--devin-v2 .grid {
@@ -2215,121 +2119,121 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   padding: 60px 60px 40px; gap: 40px; align-items: center;
 }
 
-/* LEFT – card stack */
-.hero--devin-v2 .stack {
-  position: relative; width: 400px; height: 360px; margin-left: 20px;
-  perspective: 1400px;
+/* LEFT – social-proof slider composition (replaces card stack) */
+.hero--devin-v2 .sp-slider {
+  position: relative;
+  width: 100%; max-width: 590px;
+  height: 540px;
+  margin: 0 auto;
 }
-.hero--devin-v2 .card {
-  position: absolute; inset: 0; width: 100%;
-  border-radius: 18px; padding: 22px 24px;
-  background: linear-gradient(180deg, rgba(28,22,12,0.78) 0%, rgba(14,10,5,0.72) 100%);
-  border: 1px solid transparent;
-  box-shadow: 0 30px 80px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,220,160,0.08);
-  backdrop-filter: blur(18px) saturate(1.3);
-  -webkit-backdrop-filter: blur(18px) saturate(1.3);
-  color: rgba(255,245,230,0.92);
-  transition: transform 1400ms cubic-bezier(.22,.61,.36,1), opacity 1400ms cubic-bezier(.22,.61,.36,1), filter 1400ms cubic-bezier(.22,.61,.36,1), z-index 0s linear 700ms;
-  transform-origin: 30% 60%;
-  will-change: transform, opacity;
+.hero--devin-v2 .sp-slide {
+  position: absolute; inset: 0;
+  display: grid; grid-template-columns: 360px 280px;
+  gap: 0;
+  opacity: 0; transition: opacity .55s ease; pointer-events: none;
+}
+.hero--devin-v2 .sp-slide.sp-active { opacity: 1; pointer-events: auto; }
+
+/* Photo: 6:9 aspect, head at top, in front of card */
+.hero--devin-v2 .sp-photo {
+  position: relative; z-index: 2;
+  width: 360px; height: 540px;
+  border-radius: 24px;
   overflow: hidden;
-  display: flex; flex-direction: column; justify-content: center;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.45);
 }
-.hero--devin-v2 .card::before {
-  content: ''; position: absolute; inset: 0;
-  border-radius: 18px; padding: 1px;
-  background: linear-gradient(135deg,
-    rgba(232,184,115,0.55) 0%, rgba(255,228,170,0.85) 18%,
-    rgba(184,140,70,0.35) 38%, rgba(255,215,140,0.7) 58%,
-    rgba(140,100,50,0.3) 78%, rgba(232,184,115,0.55) 100%);
-  background-size: 220% 220%; background-position: 0% 50%;
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor; mask-composite: exclude;
-  pointer-events: none; opacity: 0.6; transition: opacity 900ms ease;
+.hero--devin-v2 .sp-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center top;
+  transform: scale(1.5);
+  transform-origin: center top;
+  display: block;
 }
-.hero--devin-v2 .card[data-pos="0"]::before { opacity: 1; animation: dvGoldShimmer 6s linear infinite; }
-@keyframes dvGoldShimmer { 0% { background-position: 0% 50%; } 100% { background-position: -220% 50%; } }
-/* Soft floating glint – a centered radial blob with maximally smooth
-   alpha fade at every stop. No corner anchoring, no border-radius on
-   the pseudo (the card's overflow:hidden + border-radius does the
-   rounded clipping), so the only visible shape is the gradient itself,
-   never an edge. The blob drifts diagonally across the card. */
-.hero--devin-v2 .card[data-pos="0"]::after {
-  content: ''; position: absolute; inset: 0;
-  background: radial-gradient(
-    circle at 50% 50%,
-    rgba(255, 240, 200, 0.20) 0%,
-    rgba(255, 230, 175, 0.13) 14%,
-    rgba(255, 225, 170, 0.07) 30%,
-    rgba(255, 222, 165, 0.03) 50%,
-    rgba(255, 222, 165, 0.01) 70%,
-    transparent 92%
-  );
-  opacity: 0;
-  transform: translate(60%, -60%);
-  animation: dvGoldGlint 2800ms cubic-bezier(.4, 0, .2, 1) 700ms 1 forwards;
+
+/* Card behind photo, half width, only right side rounded, no left border */
+.hero--devin-v2 .sp-card {
+  position: relative; z-index: 1;
+  width: 280px; height: 540px;
+  background: rgba(255,255,255,0.55);
+  backdrop-filter: blur(22px) saturate(1.4);
+  -webkit-backdrop-filter: blur(22px) saturate(1.4);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-left: none;
+  border-radius: 0 24px 24px 0;
+  padding: 28px 26px 28px 50px;
+  margin-left: -36px;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.20);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+
+/* TOP – winner pill (gold gradient, shimmer) */
+.hero--devin-v2 .sp-winner-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  align-self: flex-start;
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+  color: #fff;
+  font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+  padding: 9px 14px; border-radius: 980px;
+  box-shadow: 0 8px 22px rgba(245,158,11,.5), 0 1px 0 rgba(255,255,255,.4) inset;
+  position: relative; overflow: hidden;
+  margin-bottom: 18px;
+  white-space: nowrap;
+}
+.hero--devin-v2 .sp-winner-pill svg { width: 13px; height: 13px; flex-shrink: 0; filter: drop-shadow(0 1px 1px rgba(0,0,0,.2)); }
+.hero--devin-v2 .sp-winner-pill::after {
+  content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,.5) 50%, transparent 100%);
+  transform: translateX(-100%);
+  animation: spPillShine 3.2s linear infinite;
   pointer-events: none;
-  mix-blend-mode: screen;
-  filter: blur(8px);
 }
-@keyframes dvGoldGlint {
-  0%   { transform: translate(60%, -60%);  opacity: 0; }
-  18%  { transform: translate(34%, -34%);  opacity: 0.85; }
-  45%  { transform: translate(0%, 0%);     opacity: 1; }
-  78%  { transform: translate(-30%, 30%);  opacity: 0.45; }
-  100% { transform: translate(-58%, 58%);  opacity: 0; }
-}
+@keyframes spPillShine { 0%{transform:translateX(-100%)} 100%{transform:translateX(100%)} }
 
-.hero--devin-v2 .card-eyebrow {
-  position: absolute; top: 14px; left: 22px;
-  font-family: var(--font-sans); font-size: 54px; font-weight: 900;
-  letter-spacing: -0.04em; margin: 0; line-height: 1;
-  background: linear-gradient(180deg, rgba(245,225,185,0.9) 0%, rgba(245,225,185,0.06) 100%);
-  -webkit-background-clip: text; background-clip: text;
-  color: transparent; -webkit-text-fill-color: transparent;
+/* MID – stacked order plates (mn-notif-style drop-in) */
+.hero--devin-v2 .sp-orders { position: relative; height: 220px; margin-bottom: 16px; flex-shrink: 0; }
+.hero--devin-v2 .sp-order {
+  position: absolute; left: 0; right: 0;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 14px;
+  padding: 10px 12px;
+  box-shadow: 0 10px 28px rgba(0,0,0,.10), 0 1px 2px rgba(0,0,0,.04);
+  display: flex; align-items: center; gap: 10px;
+  opacity: 0;
 }
-.hero--devin-v2 .card-head { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
-.hero--devin-v2 .card-icon {
-  width: 32px; height: 32px; border-radius: 9px;
-  display: grid; place-items: center; color: white; font-size: 16px;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.25), 0 6px 16px rgba(0,0,0,0.3);
+.hero--devin-v2 .sp-order.in { animation: spOrderDrop .55s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+@keyframes spOrderDrop {
+  0%   { opacity: 0; transform: translateY(-30px) scale(.92); }
+  60%  { opacity: 1; transform: translateY(3px) scale(1.02); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
 }
-.hero--devin-v2 .card-title {
-  font-family: var(--font-sans); font-size: 18px; font-weight: 600;
-  letter-spacing: -0.01em; color: #fff; line-height: 1.25;
+.hero--devin-v2 .sp-order-icon {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,.18);
 }
-.hero--devin-v2 .card-line {
-  font-family: var(--font-text); font-size: 13.5px; line-height: 1.55;
-  color: rgba(248,236,210,0.78); margin-bottom: 10px; letter-spacing: -0.005em;
-}
-.hero--devin-v2 .card-input {
-  margin-top: 22px;
-  background: rgba(22,16,8,0.78);
-  border: 1px solid rgba(232,184,115,0.14); border-radius: 12px;
-  padding: 14px 16px;
-  display: flex; align-items: center; justify-content: space-between;
-  font-family: var(--font-text); font-size: 13px;
-  color: rgba(232,210,170,0.55);
-}
-.hero--devin-v2 .card-input .arrow {
-  width: 26px; height: 26px; border-radius: 50%;
-  background: rgba(232,184,115,0.08);
-  display: grid; place-items: center;
-  color: rgba(244,219,168,0.7); font-size: 13px;
-}
+.hero--devin-v2 .sp-order-icon img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hero--devin-v2 .sp-order-body { flex: 1; min-width: 0; }
+.hero--devin-v2 .sp-order-title { font-size: 14px; font-weight: 700; color: #1d1d1f; letter-spacing: -0.01em; line-height: 1.25; }
+.hero--devin-v2 .sp-order-sub   { font-size: 13px; color: rgba(0,0,0,.5); line-height: 1.3; margin-top: 2px; }
+.hero--devin-v2 .sp-order-price { font-size: 15px; font-weight: 800; color: #15803d; letter-spacing: -0.01em; flex-shrink: 0; }
 
-/* Stack positions */
-.hero--devin-v2 .card[data-pos="0"] { transform: translate(0,0) rotate(0) scale(1); opacity: 1; z-index: 50; filter: brightness(1); }
-.hero--devin-v2 .card[data-pos="1"] { transform: translate(-22px,14px) rotate(-4deg) scale(0.97); opacity: .78; z-index: 40; filter: brightness(.78); }
-.hero--devin-v2 .card[data-pos="2"] { transform: translate(-44px,28px) rotate(-8deg) scale(0.94); opacity: .55; z-index: 30; filter: brightness(.6); }
-.hero--devin-v2 .card[data-pos="3"] { transform: translate(-62px,38px) rotate(-11deg) scale(0.91); opacity: .30; z-index: 20; filter: brightness(.45); }
-.hero--devin-v2 .card[data-pos="4"],
-.hero--devin-v2 .card[data-pos="5"] { transform: translate(-80px,50px) rotate(-13deg) scale(0.88); opacity: 0; z-index: 10; pointer-events: none; }
-.hero--devin-v2 .card[data-pos="6"] {
-  transform: translate(-340px,-40px) rotate(-22deg) scale(0.92);
-  opacity: 0; z-index: 60; pointer-events: none; filter: brightness(.85);
-  transition: transform 1400ms cubic-bezier(.22,.61,.36,1), opacity 1100ms cubic-bezier(.4,0,.6,1), filter 1400ms cubic-bezier(.22,.61,.36,1);
-}
+/* BOTTOM – stars / quote / divider / name / meta */
+.hero--devin-v2 .sp-stars { display: inline-flex; gap: 1px; color: #fbbf24; font-size: 15px; margin-top: auto; margin-bottom: 10px; letter-spacing: 1px; }
+.hero--devin-v2 .sp-quote { font-size: 13.5px; line-height: 1.5; color: var(--c-near); letter-spacing: -0.005em; margin-bottom: 0; }
+.hero--devin-v2 .sp-divider { height: 1px; background: rgba(0,0,0,.12); margin: 14px 0; }
+.hero--devin-v2 .sp-name { font-size: 14px; font-weight: 700; color: var(--c-near); letter-spacing: -0.01em; }
+.hero--devin-v2 .sp-meta { font-size: 12px; color: var(--c-gray2); margin-top: 8px; }
+.hero--devin-v2 .sp-meta .sp-flag { font-size: 1.4em; vertical-align: -2px; margin-left: 2px; }
+
+/* Dots */
+.hero--devin-v2 .sp-dots { display: flex; justify-content: center; gap: 8px; margin-top: 18px; }
+.hero--devin-v2 .sp-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,.25); transition: background .25s, width .25s; cursor: pointer; }
+.hero--devin-v2 .sp-dot.active { background: rgba(255,255,255,.85); width: 22px; border-radius: 3px; }
 
 /* Limited-time eyebrow strip */
 .hero--devin-v2 .limited {
@@ -2442,12 +2346,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 @media (max-width: 980px) {
   .hero--devin-v2 .grid {
     grid-template-columns: 1fr;
-    padding: 100px 32px 56px;
-    gap: 56px;
+    padding: 100px 32px 80px;
+    gap: 48px;
     min-height: auto;
   }
-  .hero--devin-v2 .stack { width: 360px; height: 340px; margin: 0 auto; order: 2; }
-  /* Single-column copy: everything centred horizontally */
+  .hero--devin-v2 .sp-slider { max-width: 100%; height: auto; order: 2; }
+  .hero--devin-v2 .sp-slide { grid-template-columns: 1fr; position: relative; inset: auto; }
+  .hero--devin-v2 .sp-slide:not(.sp-active) { display: none; }
+  .hero--devin-v2 .sp-photo { width: 100%; max-width: 360px; height: 460px; margin: 0 auto; }
+  .hero--devin-v2 .sp-card {
+    width: 100%; max-width: 320px;
+    margin: -28px auto 0;
+    height: auto;
+    padding: 28px 24px;
+    border-left: 1px solid rgba(0,0,0,0.06);
+    border-radius: 0 0 24px 24px;
+  }
   .hero--devin-v2 .copy {
     padding-right: 0;
     order: 1;
@@ -2457,7 +2371,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   }
   .hero--devin-v2 .copy h1 { font-size: clamp(40px, 8vw, 60px); }
   .hero--devin-v2 .cta { width: 100%; max-width: 360px; }
-  /* Hoist .actions children up to .copy via display:contents so cta-link can be ordered last */
   .hero--devin-v2 .actions { display: contents; }
   .hero--devin-v2 .cta-link { order: 1; margin-top: 16px; }
   .hero--devin-v2 .cta-fine { text-align: center; }
@@ -2466,172 +2379,74 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   .hero--devin-v2 .lede { text-align: center; }
   .hero--devin-v2 .lede { max-width: 100%; }
 }
-@media (max-width: 768px) {
-  /* Push the icon + title block (and everything below it) down by 30px
-     so the card-eyebrow number stays put while the rest sits lower. */
-  .hero--devin-v2 .card-head { margin-top: 30px; }
-}
 @media (max-width: 480px) {
-  .hero--devin-v2 .grid { padding: 88px 20px 48px; }
-  .hero--devin-v2 .stack { width: 100%; max-width: 360px; height: 320px; }
-}
-
-/* Floating product images – 3x size, fade in/out cycle, peak 80% opacity */
-.hero--devin-v2 .floater {
-  position: absolute;
-  z-index: 2;
-  pointer-events: none;
-  width: clamp(330px, 33vw, 480px);
-  height: auto;
-  opacity: 0;
-  filter: drop-shadow(0 18px 36px rgba(0,0,0,0.55));
-  will-change: transform, opacity;
-  user-select: none;
-  animation: dvFloaterCycle 12s ease-in-out infinite;
-}
-.hero--devin-v2 .floater.f1 {
-  top: calc(14% - 100px);
-  left: calc(11% - 100px);
-  --rot: -6deg;
-  --peak: 0.8;
-  animation-delay: 0s;
-}
-.hero--devin-v2 .floater.f2 {
-  bottom: calc(6% - 60px);
-  left: calc(32% - 160px);
-  top: auto;
-  right: auto;
-  --rot: 110deg;
-  --peak: 0.3;
-  animation-delay: -4s;
-}
-.hero--devin-v2 .floater.f3 {
-  bottom: calc(4% + 300px);
-  right: calc(18% - 190px);
-  width: clamp(280px, 28vw, 408px);
-  --rot: -3deg;
-  --peak: 0.5;
-  animation-delay: -8s;
-}
-@keyframes dvFloaterCycle {
-  0%   { opacity: 0;          transform: rotate(var(--rot)) translateY(0)    scale(0.96); }
-  18%  { opacity: var(--peak); transform: rotate(var(--rot)) translateY(-4px) scale(1); }
-  50%  { opacity: var(--peak); transform: rotate(var(--rot)) translateY(-16px) scale(1); }
-  82%  { opacity: 0;          transform: rotate(var(--rot)) translateY(-8px) scale(1.02); }
-  100% { opacity: 0;          transform: rotate(var(--rot)) translateY(0)    scale(0.96); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .hero--devin-v2 .floater { animation: none; opacity: var(--peak); transform: rotate(var(--rot)); }
-}
-@media (max-width: 1280px) {
-  .hero--devin-v2 .floater { width: clamp(260px, 28vw, 380px); }
-  .hero--devin-v2 .floater.f1 { top: calc(12% - 80px); left: calc(6% - 80px); }
-  .hero--devin-v2 .floater.f2 { bottom: calc(5% - 50px); left: calc(28% - 130px); top: auto; right: auto; }
-  .hero--devin-v2 .floater.f3 {
-    bottom: calc(4% + 240px);
-    right: calc(12% - 150px);
-    width: clamp(220px, 24vw, 323px);
-  }
-}
-@media (max-width: 1100px) {
-  .hero--devin-v2 .floater { width: clamp(200px, 24vw, 280px); }
-  .hero--devin-v2 .floater.f1 { top: calc(10% - 60px); left: calc(3% - 60px); }
-  .hero--devin-v2 .floater.f2 { bottom: calc(4% - 40px); left: calc(24% - 100px); top: auto; right: auto; }
-  .hero--devin-v2 .floater.f3 {
-    bottom: calc(3% + 180px);
-    right: calc(8% - 125px);
-    width: clamp(170px, 20vw, 238px);
-  }
-}
-@media (max-width: 900px) {
-  .hero--devin-v2 .floater { display: none; }
+  .hero--devin-v2 .grid { padding: 88px 20px 64px; }
+  .hero--devin-v2 .sp-photo { height: 420px; }
 }
 </style>
 
 <section class="hero hero--devin-v2" id="hero">
-  <div class="aurora" aria-hidden="true">
-    <div class="blob b1"></div>
-    <div class="blob b2"></div>
-    <div class="blob b3"></div>
-    <div class="blob b4"></div>
-    <div class="blob b5"></div>
-  </div>
   <div class="vignette" aria-hidden="true"></div>
-  <div class="spark s1" aria-hidden="true"></div>
-  <div class="spark s2" aria-hidden="true"></div>
-  <div class="spark s3" aria-hidden="true"></div>
-  <div class="spark s4" aria-hidden="true"></div>
-  <div class="spark s5" aria-hidden="true"></div>
-
-  <img class="floater f1" src="https://work1.sellvia.com/images/7305.webp" alt="" aria-hidden="true" loading="eager" decoding="async">
-  <img class="floater f2" src="https://work1.sellvia.com/images/7306.webp" alt="" aria-hidden="true" loading="eager" decoding="async">
-  <img class="floater f3" src="https://work1.sellvia.com/images/7307.webp" alt="" aria-hidden="true" loading="eager" decoding="async">
 
   <div class="grid">
-    <!-- LEFT – animated card stack of 7 bundle items -->
-    <div class="stack" id="heroStack">
-      <div class="card" data-pos="0">
-        <div class="card-eyebrow">01</div>
-        <div class="card-head">
-          <div class="card-icon" style="background: linear-gradient(135deg, #4f9dff, #2563eb)">◆</div>
-          <div class="card-title">Turnkey Online Store</div>
+    <!-- LEFT – social-proof slider (3 grant winners) -->
+    <div class="sp-slider" id="spSlider">
+
+      <div class="sp-slide sp-active" data-idx="0">
+        <div class="sp-photo"><img src="img/social/p1.webp" alt="Marcus J., grant winner" loading="eager" decoding="async"></div>
+        <div class="sp-card">
+          <span class="sp-winner-pill"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.39 6.96H22l-6.18 4.49L18.18 22 12 17.27 5.82 22l2.36-8.55L2 8.96h7.61z"/></svg>$5,000 Grant Winner</span>
+          <div class="sp-orders">
+            <div class="sp-order" data-pos="0"><div class="sp-order-icon"><img src="img/freebasic/p1_2x.webp" alt="" loading="lazy"></div><div class="sp-order-body"><div class="sp-order-title">First Home Buyer Kit</div><div class="sp-order-sub">Marcus from NY · just now</div></div><div class="sp-order-price">+$49</div></div>
+            <div class="sp-order" data-pos="1"><div class="sp-order-icon"><img src="img/freebasic/p2_2x.webp" alt="" loading="lazy"></div><div class="sp-order-body"><div class="sp-order-title">Budget Planner</div><div class="sp-order-sub">Lisa from TX · 12s ago</div></div><div class="sp-order-price">+$29</div></div>
+            <div class="sp-order" data-pos="2"><div class="sp-order-icon"><img src="img/freebasic/p3_2x.webp" alt="" loading="lazy"></div><div class="sp-order-body"><div class="sp-order-title">Career Guide</div><div class="sp-order-sub">Chris from FL · 38s ago</div></div><div class="sp-order-price">+$39</div></div>
+          </div>
+          <div class="sp-stars">★★★★★</div>
+          <p class="sp-quote">"After being laid off, the grant let me stock my catalog with bestsellers. First sale came in within 48 hours."</p>
+          <div class="sp-divider"></div>
+          <div class="sp-name">Marcus J.</div>
+          <div class="sp-meta">Former teacher · Atlanta, US <span class="sp-flag">🇺🇸</span></div>
         </div>
-        <div class="card-line">Products, payments, custom domain – launched for you in minutes.</div>
-        <div class="card-input"><span>Launch your store…</span><span class="arrow">→</span></div>
       </div>
-      <div class="card" data-pos="1">
-        <div class="card-eyebrow">02</div>
-        <div class="card-head">
-          <div class="card-icon" style="background: linear-gradient(135deg, #a78bfa, #7c3aed)">✱</div>
-          <div class="card-title">$40 Ad Credit</div>
+
+      <div class="sp-slide" data-idx="1">
+        <div class="sp-photo"><img src="img/social/p2.webp" alt="Mei L., grant winner" loading="lazy"></div>
+        <div class="sp-card">
+          <span class="sp-winner-pill"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.39 6.96H22l-6.18 4.49L18.18 22 12 17.27 5.82 22l2.36-8.55L2 8.96h7.61z"/></svg>$5,000 Grant Winner</span>
+          <div class="sp-orders">
+            <div class="sp-order" data-pos="0"><div class="sp-order-icon"><img src="img/freebasic/p4_2x.webp" alt="" loading="lazy"></div><div class="sp-order-body"><div class="sp-order-title">Handmade Candle Set</div><div class="sp-order-sub">Sarah from CA · just now</div></div><div class="sp-order-price">+$59</div></div>
+            <div class="sp-order" data-pos="1"><div class="sp-order-icon"><img src="img/freebasic/p5_2x.webp" alt="" loading="lazy"></div><div class="sp-order-body"><div class="sp-order-title">Linen Cushion Cover</div><div class="sp-order-sub">Megan from WA · 18s ago</div></div><div class="sp-order-price">+$35</div></div>
+            <div class="sp-order" data-pos="2"><div class="sp-order-icon"><img src="img/freebasic/p6_2x.webp" alt="" loading="lazy"></div><div class="sp-order-body"><div class="sp-order-title">Ceramic Mug</div><div class="sp-order-sub">Rachel from OR · 51s ago</div></div><div class="sp-order-price">+$24</div></div>
+          </div>
+          <div class="sp-stars">★★★★★</div>
+          <p class="sp-quote">"The grant covered my first month of ads and packaging. I crossed $4K in revenue before the trial even ended."</p>
+          <div class="sp-divider"></div>
+          <div class="sp-name">Mei L.</div>
+          <div class="sp-meta">Boutique owner · Portland, US <span class="sp-flag">🇺🇸</span></div>
         </div>
-        <div class="card-line">Free advertising credit added to your account on signup.</div>
-        <div class="card-input"><span>Apply $40 to your first campaign…</span><span class="arrow">→</span></div>
       </div>
-      <div class="card" data-pos="2">
-        <div class="card-eyebrow">03</div>
-        <div class="card-head">
-          <div class="card-icon" style="background: linear-gradient(135deg, #f5a623, #ff6820)">▲</div>
-          <div class="card-title">Amazon Seller Kit</div>
+
+      <div class="sp-slide" data-idx="2">
+        <div class="sp-photo"><img src="img/social/p3.webp" alt="Priya S., grant winner" loading="lazy"></div>
+        <div class="sp-card">
+          <span class="sp-winner-pill"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.39 6.96H22l-6.18 4.49L18.18 22 12 17.27 5.82 22l2.36-8.55L2 8.96h7.61z"/></svg>$5,000 Grant Winner</span>
+          <div class="sp-orders">
+            <div class="sp-order" data-pos="0"><div class="sp-order-icon"><img src="img/freebasic/p7_2x.webp" alt="" loading="lazy"></div><div class="sp-order-body"><div class="sp-order-title">Self-Care Toolkit</div><div class="sp-order-sub">Olivia from NY · just now</div></div><div class="sp-order-price">+$49</div></div>
+            <div class="sp-order" data-pos="1"><div class="sp-order-icon"><img src="img/freebasic/p8_2x.webp" alt="" loading="lazy"></div><div class="sp-order-body"><div class="sp-order-title">Healthy Meal Plan</div><div class="sp-order-sub">Jamie from IL · 22s ago</div></div><div class="sp-order-price">+$29</div></div>
+            <div class="sp-order" data-pos="2"><div class="sp-order-icon"><img src="img/reviews/ksenia.webp" alt="" loading="lazy"></div><div class="sp-order-body"><div class="sp-order-title">Career Development</div><div class="sp-order-sub">Ava from GA · 47s ago</div></div><div class="sp-order-price">+$39</div></div>
+          </div>
+          <div class="sp-stars">★★★★★</div>
+          <p class="sp-quote">"I was juggling kids and a part-time job. The $5,000 helped me launch tools that run my store while I sleep."</p>
+          <div class="sp-divider"></div>
+          <div class="sp-name">Priya S.</div>
+          <div class="sp-meta">Mom of two · Houston, US <span class="sp-flag">🇺🇸</span></div>
         </div>
-        <div class="card-line">Setup guide, ready product feed, and Seller University access.</div>
-        <div class="card-input"><span>Start selling on Amazon…</span><span class="arrow">→</span></div>
       </div>
-      <div class="card" data-pos="3">
-        <div class="card-eyebrow">04</div>
-        <div class="card-head">
-          <div class="card-icon" style="background: linear-gradient(135deg, #ec4899, #f43f5e)">●</div>
-          <div class="card-title">Premium Store Design</div>
-        </div>
-        <div class="card-line">Custom theme, polished layout, optimized for conversions.</div>
-        <div class="card-input"><span>Preview your store design…</span><span class="arrow">→</span></div>
-      </div>
-      <div class="card" data-pos="4">
-        <div class="card-eyebrow">05</div>
-        <div class="card-head">
-          <div class="card-icon" style="background: linear-gradient(135deg, #14b8a6, #06b6d4)">◇</div>
-          <div class="card-title">Google promotion gift</div>
-        </div>
-        <div class="card-line">A free ad campaign run by our team to bring real buyers from day one.</div>
-        <div class="card-input"><span>Launch your Google ad campaign…</span><span class="arrow">→</span></div>
-      </div>
-      <div class="card" data-pos="5">
-        <div class="card-eyebrow">06</div>
-        <div class="card-head">
-          <div class="card-icon" style="background: linear-gradient(135deg, #22c55e, #16a34a)">▶</div>
-          <div class="card-title">Personal manager</div>
-        </div>
-        <div class="card-line">A real human in your corner for strategy, onboarding and growth.</div>
-        <div class="card-input"><span>Chat with your personal manager…</span><span class="arrow">→</span></div>
-      </div>
-      <div class="card" data-pos="6">
-        <div class="card-eyebrow">07</div>
-        <div class="card-head">
-          <div class="card-icon" style="background: linear-gradient(135deg, #6366f1, #8b5cf6)">✦</div>
-          <div class="card-title">1-on-1 business training, live with your coach</div>
-        </div>
-        <div class="card-line">Coaching on marketing, sales and scaling – tailored to you.</div>
-        <div class="card-input"><span>Book your 1-on-1 coaching session…</span><span class="arrow">→</span></div>
+
+      <div class="sp-dots" id="spDots">
+        <span class="sp-dot active" data-idx="0"></span>
+        <span class="sp-dot" data-idx="1"></span>
+        <span class="sp-dot" data-idx="2"></span>
       </div>
     </div>
 
@@ -2660,37 +2475,50 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="cta-fine">Get started in less than 60 seconds • Cancel anytime</p>
     </div>
   </div>
+
 </section>
 
 <script>
-/* Hero V2 – animated card stack: cycle data-pos across 7 cards every 5.2s */
-;(function() {
-  const stack = document.getElementById('heroStack');
-  if (!stack) return;
-  const cards = stack.querySelectorAll('.card');
-  const N = cards.length;
-  if (!N) return;
-  let idx = 0;
-  function update() {
-    cards.forEach(function(c, i) {
-      c.dataset.pos = (i - idx + N) % N;
+/* Hero – social-proof slider: rotate winners every 9s, cascade order plates */
+;(function(){
+  const slider = document.getElementById('spSlider');
+  if (!slider) return;
+  const slides = slider.querySelectorAll('.sp-slide');
+  const dots = document.querySelectorAll('#spDots .sp-dot');
+  if (!slides.length) return;
+  const N = slides.length;
+  let idx = 0, timer = null;
+  const SLIDE_MS = 9000;
+
+  function animateOrders(slide) {
+    const orders = slide.querySelectorAll('.sp-order');
+    orders.forEach((o, i) => {
+      o.classList.remove('in');
+      void o.offsetWidth;
+      o.style.top = (i * 64) + 'px';
+      o.style.animationDelay = (i * 0.7) + 's';
+      o.classList.add('in');
     });
   }
-  update();
-  const tick = function() {
-    idx = (idx + 1) % N;
-    update();
-  };
-  let timer = setInterval(tick, 5200);
-  if ('IntersectionObserver' in window) {
-    const io = new IntersectionObserver(function(entries) {
-      entries.forEach(function(e) {
-        if (e.isIntersecting && !timer) timer = setInterval(tick, 5200);
-        else if (!e.isIntersecting && timer) { clearInterval(timer); timer = null; }
-      });
-    }, { threshold: 0.05 });
-    io.observe(stack);
+  function activate(i) {
+    idx = i;
+    slides.forEach((s, j) => s.classList.toggle('sp-active', j === i));
+    dots.forEach((d, j) => d.classList.toggle('active', j === i));
+    animateOrders(slides[i]);
   }
+  function start() { if (!timer) timer = setInterval(() => activate((idx + 1) % N), SLIDE_MS); }
+  function stop()  { if (timer) { clearInterval(timer); timer = null; } }
+
+  dots.forEach((d, i) => d.addEventListener('click', () => { stop(); activate(i); start(); }));
+  slider.addEventListener('mouseenter', stop);
+  slider.addEventListener('mouseleave', start);
+
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { animateOrders(slides[idx]); start(); } else stop(); });
+    }, { threshold: 0.2 });
+    io.observe(slider);
+  } else { animateOrders(slides[0]); start(); }
 })();
 </script>
 
@@ -2698,59 +2526,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="stat-bar">
   <div class="stat-bar-inner">
     <div class="stat-item">
-      <span class="stat-num-row">
-        <span class="stat-n"
-              data-countup
-              data-prefix=""
-              data-suffix=""
-              data-from="1"
-              data-to="7"
-              data-decimals="0"
-              data-duration="1800">7</span>
-        <svg class="stat-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path fill-rule="evenodd" clip-rule="evenodd" d="M5.3182 2.5H18.6818L22.5 9.15L12 21.5L1.5 9.15L5.3182 2.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M5.31812 2.5L12 21.5L18.6818 2.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M1.5 9.15002H22.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M7.70459 9.15L12 2.5L16.2955 9.15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </span>
-      <span class="stat-l">Assets in your Business Grant</span>
-    </div>
-    <div class="stat-item">
-      <span class="stat-n"
-            data-countup
-            data-prefix=""
-            data-suffix="+"
-            data-from="700"
-            data-to="1500000"
-            data-decimals="0"
-            data-duration="1800">1,500,000+</span>
+      <span class="stat-n">1,500,000+</span>
       <span class="stat-l">Stores launched worldwide</span>
     </div>
     <div class="stat-item">
-      <span class="stat-n"
-            data-countup
-            data-prefix="$"
-            data-suffix="B+"
-            data-from="0"
-            data-to="1.5"
-            data-decimals="1"
-            data-duration="1800">$1.5B+</span>
+      <span class="stat-n">$1.5B+</span>
       <span class="stat-l">Earned by store owners</span>
     </div>
     <div class="stat-item">
-      <span class="stat-n"
-            data-countup
-            data-prefix=""
-            data-suffix="★"
-            data-from="0"
-            data-to="4.8"
-            data-decimals="1"
-            data-duration="1800">4.8★</span>
+      <span class="stat-n">300M+</span>
+      <span class="stat-l">Active buyers worldwide</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-n">4.8★</span>
       <span class="stat-l">Average customer rating</span>
     </div>
   </div>
 </div>
+
 <!-- ═══ FREEBASIC ═══ -->
 <style>
 .freebasic-section {
@@ -3202,7 +2995,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <style>
 /* bonus-section fits naturally as a full-width page section */
 .bonus-section {
-  background: #f5f5f7;
+  background: #fff;
   padding: 120px 24px;
   width: 100%;
 }
@@ -3388,7 +3181,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 /* ── UPGRADE CARDS – freebasic-style: solid white, mint accents, smooth float ── */
 .lcard {
   position: absolute;
-  background: #fff;
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(12px) saturate(1.2);
+  -webkit-backdrop-filter: blur(12px) saturate(1.2);
   border-radius: 14px;
   padding: 16px 18px;
   box-shadow: 0 12px 40px rgba(0,0,0,.10), 0 2px 8px rgba(0,0,0,.04);
@@ -3407,6 +3202,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 .upg-amount { font-size: 28px; font-weight: 800; color: var(--c-near); letter-spacing: -.03em; line-height: 1; margin-bottom: 12px; }
 .upg-pill   { display: inline-flex; align-items: center; gap: 6px; background: rgba(34,197,94,.16); color: #15803d; font-size: 11.5px; font-weight: 600; padding: 5px 11px; border-radius: 980px; line-height: 1.2; }
 .upg-pill svg { width: 11px; height: 11px; }
+.upg-pill--live { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; padding: 5px 12px; }
+.upg-live-dot { width: 7px; height: 7px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 6px rgba(34,197,94,.8); animation: livePulse 1.8s ease-in-out infinite; flex-shrink: 0; }
 
 .upg-spark { display: flex; align-items: flex-end; gap: 5px; height: 38px; margin-bottom: 10px; }
 .upg-spark .sb { flex: 1; border-radius: 3px 3px 0 0; background: rgba(34,197,94,.18); }
@@ -3489,7 +3286,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 .ms-stat-label { font-size: 10px; color: rgba(0,0,0,.38); letter-spacing: .06em; text-transform: uppercase; margin-top: 1px; }
 
 /* dots */
-.dot-nav { position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%); display: flex; gap: 7px; z-index: 20; }
+.dot-nav { display: none; }
 .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(0,0,0,.2); transition: background .25s, width .25s; cursor: pointer; }
 .dot.active { background: #1d1d1f; width: 20px; border-radius: 3px; }
 
@@ -3531,7 +3328,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <svg class="bullet-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </li>
         <li class="bullet-item" data-panel="1">
-          <span class="bullet-text">Top-selling products to stock your catalog and earn BIG</span>
+          <span class="bullet-text">Stock top-selling products and watch new orders roll in</span>
           <svg class="bullet-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </li>
         <li class="bullet-item" data-panel="2">
@@ -3540,50 +3337,37 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </li>
       </ul>
       <div class="cta-wrap"><a href="https://sellvia.com/checkout/?product=custom&type_custom=free_basic_hosting" class="btn btn-filled" id="bundleCtaBtn">Get my free store + $5,000 Grant</a></div>
-      <p style="margin-top:14px;font-size:13px;color:var(--c-gray3)">Get started in less than 60 seconds • Cancel anytime</p>
     </div>
 
     <div class="bonus-right">
       <!-- Panel 0: $5,000 Grant -->
       <div class="panel visible" data-idx="0">
         <img class="panel-photo" src="img/Bonus/v2/yacht.webp" alt="" loading="lazy">
-        <div class="lcard lcard-tr float-a" style="width:200px">
+        <div class="lcard float-a" style="width:190px;right:20px;bottom:98px">
           <div class="upg-label">Grant credited</div>
           <div class="upg-amount">$5,000</div>
           <span class="upg-pill">Funded into your store</span>
         </div>
-        <div class="lcard lcard-br float-b" style="width:210px">
-          <div class="upg-label">Ad budget unlocked</div>
-          <div class="upg-amount">+$2,500</div>
-          <span class="upg-pill">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17l5-5 4 4 5-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Reach boosted
-          </span>
-        </div>
       </div>
 
-      <!-- Panel 1: Top-selling products -->
+      <!-- Panel 1: New orders after catalog upgrade -->
       <div class="panel" data-idx="1">
         <img class="panel-photo" src="img/Bonus/v2/resort.webp" alt="" loading="lazy">
-        <div class="lcard lcard-tr float-a" style="width:210px">
-          <div class="upg-label">Catalog upgraded</div>
-          <div class="upg-amount">+120 products</div>
-          <span class="upg-pill">Best-sellers added</span>
-        </div>
-        <div class="lcard lcard-bl float-b" style="width:200px">
-          <div class="upg-label">Orders this month</div>
-          <div class="upg-amount">3.4×</div>
-          <span class="upg-pill">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12l7-7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Volume up
-          </span>
+        <div class="lcard float-a" style="width:190px;left:20px;bottom:108px">
+          <span class="upg-pill upg-pill--live"><span class="upg-live-dot"></span>New order</span>
+          <div style="display:flex;align-items:center;gap:10px;margin-top:10px">
+            <div class="upg-amount" style="margin:0">+104</div>
+            <span class="upg-pill" style="padding:5px 9px">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12l7-7 7 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </div>
         </div>
       </div>
 
-      <!-- Panel 2: Cutting-edge tools -->
+      <!-- Panel 2: Revenue from cutting-edge tools -->
       <div class="panel" data-idx="2">
-        <img class="panel-photo" src="img/Bonus/v2/sportscar.webp" alt="" loading="lazy">
-        <div class="lcard lcard-tr float-a" style="width:210px">
+        <img class="panel-photo" src="img/Bonus/v2/sportscar.webp" alt="" loading="lazy" style="object-position:center 35%">
+        <div class="lcard lcard-bl float-a" style="width:190px">
           <div class="upg-label">Revenue</div>
           <div class="upg-amount">$5,847</div>
           <div class="upg-spark">
@@ -3596,11 +3380,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <span class="sb hi" style="height:100%"></span>
           </div>
           <span class="upg-pill">+38% this month</span>
-        </div>
-        <div class="lcard lcard-br float-b" style="width:200px">
-          <div class="upg-label">Tools activated</div>
-          <div class="upg-amount">7 / 7</div>
-          <span class="upg-pill">Auto-marketing live</span>
         </div>
       </div>
 
