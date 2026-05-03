@@ -698,7 +698,7 @@ button { cursor: pointer; font-family: var(--font); outline: none; border: none;
   font-size: clamp(36px, 5vw, 56px);
   font-weight: 700;
   letter-spacing: -0.03em;
-  color: var(--c-amber);
+  color: #ffffff;
   line-height: 1;
   display: block;
 }
@@ -2090,7 +2090,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <style>
 /* Override the legacy .hero flex layout for the V2 grid layout */
 .hero.hero--devin-v2 {
-  background: #02040c;
+  background: #1d1d1f;
   display: block;
   padding: 0;
   text-align: left;
@@ -2102,83 +2102,172 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   isolation: isolate;
 }
 
-/* Subtle vignette only – no aurora/sparks/floaters */
+/* Subtle vignette */
 .hero--devin-v2 .vignette {
-  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  position: absolute; inset: 0; z-index: 2; pointer-events: none;
   background:
-    radial-gradient(ellipse 80% 60% at 50% 50%, transparent 0%, rgba(2,4,12,0.55) 100%),
-    linear-gradient(180deg, rgba(2,4,12,0.25) 0%, transparent 30%, transparent 70%, rgba(2,4,12,0.45) 100%);
+    radial-gradient(ellipse 80% 60% at 50% 50%, transparent 0%, rgba(2,4,12,0.45) 100%),
+    linear-gradient(180deg, rgba(2,4,12,0.2) 0%, transparent 30%, transparent 70%, rgba(2,4,12,0.4) 100%);
+}
+
+/* Mesh aurora – ecomzy-style subtle blobs (gold replaces blue, green = pill) */
+.hero--devin-v2 .aurora {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  overflow: hidden;
+}
+.hero--devin-v2 .aurora .blob {
+  position: absolute; border-radius: 50%;
+  mix-blend-mode: screen;
+  will-change: transform, opacity;
+  pointer-events: none;
+}
+/* Big amber focal aurora – top-left, radial gradient */
+.hero--devin-v2 .aurora .b1 {
+  width: 720px; height: 620px;
+  top: -180px; left: -160px;
+  background: radial-gradient(circle, rgba(251,191,36,0.55) 0%, rgba(251,191,36,0) 65%);
+  filter: blur(80px);
+  animation: orbAurora 20s ease-in-out infinite;
+}
+/* Top-right – gold solid orb */
+.hero--devin-v2 .aurora .b2 {
+  width: 620px; height: 520px;
+  top: -200px; right: -140px;
+  background: rgba(245,158,11,0.45);
+  filter: blur(70px);
+  animation: orbFloat 20s ease-in-out infinite;
+}
+/* Mid-left, behind slider – green orb (matches pill green) */
+.hero--devin-v2 .aurora .b3 {
+  width: 520px; height: 520px;
+  top: 32%; left: -140px;
+  background: rgba(34,197,94,0.50);
+  filter: blur(80px);
+  animation: orbFloat 16s ease-in-out -3s infinite reverse;
+}
+/* Bottom-right BIG asymmetric – gold */
+.hero--devin-v2 .aurora .b4 {
+  width: 760px; height: 640px;
+  bottom: -240px; right: -200px;
+  background: rgba(245,158,11,0.42);
+  filter: blur(100px);
+  animation: orbFloat 24s ease-in-out -6s infinite;
+}
+/* Bottom-center-left – green */
+.hero--devin-v2 .aurora .b5 {
+  width: 540px; height: 520px;
+  bottom: -180px; left: 22%;
+  background: rgba(34,197,94,0.45);
+  filter: blur(85px);
+  animation: orbFloat 18s ease-in-out -9s infinite reverse;
+}
+@keyframes orbAurora {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.9; }
+  33%      { transform: translate(40px, 50px) scale(1.08); opacity: 1; }
+  66%      { transform: translate(-30px, 70px) scale(0.95); opacity: 0.75; }
+}
+@keyframes orbFloat {
+  0%, 100% { transform: translate(0, 0); }
+  25%      { transform: translate(35px, -25px); }
+  50%      { transform: translate(55px, 30px); }
+  75%      { transform: translate(-20px, 45px); }
 }
 
 /* Layout: 2-column */
 .hero--devin-v2 .grid {
   position: relative; z-index: 3;
-  display: grid; grid-template-columns: 1fr 1fr;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 120px;
   min-height: clamp(720px, 92vh, 1000px);
   max-width: 1280px; margin: 0 auto;
-  padding: 60px 60px 40px; gap: 40px; align-items: center;
+  padding: 60px 40px 40px;
 }
+.hero--devin-v2 .sp-slider { flex: 0 0 540px; }
+.hero--devin-v2 .copy { flex: 0 1 auto; max-width: 500px; }
 
-/* LEFT – social-proof slider composition (replaces card stack) */
+/* LEFT – 3-slide carousel (active center + prev/next peeking 30%) */
 .hero--devin-v2 .sp-slider {
   position: relative;
-  width: 100%; max-width: 590px;
+  width: 100%; max-width: 540px;
   height: 540px;
   margin: 0 auto;
+  perspective: 1200px;
 }
 .hero--devin-v2 .sp-slide {
-  position: absolute; inset: 0;
-  display: grid; grid-template-columns: 360px 280px;
-  gap: 0;
-  opacity: 0; transition: opacity .55s ease; pointer-events: none;
-}
-.hero--devin-v2 .sp-slide.sp-active { opacity: 1; pointer-events: auto; }
-
-/* Photo: 6:9 aspect, head at top, in front of card */
-.hero--devin-v2 .sp-photo {
-  position: relative; z-index: 2;
+  position: absolute;
+  top: 50%; left: 50%;
   width: 360px; height: 540px;
+  margin: -270px 0 0 -180px;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+  transform: scale(0.7);
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.48s ease;
+  will-change: transform, opacity;
+}
+.hero--devin-v2 .sp-slide.sp-active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0) scale(1);
+  z-index: 3;
+}
+.hero--devin-v2 .sp-slide.sp-prev {
+  opacity: 0.5;
+  transform: translateX(-122px) scale(0.8);
+  z-index: 2;
+}
+.hero--devin-v2 .sp-slide.sp-next {
+  opacity: 0.5;
+  transform: translateX(122px) scale(0.8);
+  z-index: 2;
+}
+
+/* Single merged card: photo as background, content overlay at bottom */
+.hero--devin-v2 .sp-card {
+  position: relative;
+  width: 360px;
+  height: 540px;
   border-radius: 24px;
   overflow: hidden;
   box-shadow: 0 30px 80px rgba(0,0,0,0.45);
+  background: #1d1d1f;
+}
+.hero--devin-v2 .sp-photo {
+  position: absolute; inset: 0;
+  z-index: 1;
 }
 .hero--devin-v2 .sp-photo img {
   width: 100%; height: 100%;
   object-fit: cover; object-position: center top;
-  transform: scale(1.5);
+  transform: scale(1.45) translateY(-100px);
   transform-origin: center top;
   display: block;
 }
 
-/* Card behind photo, half width, only right side rounded, no left border */
-.hero--devin-v2 .sp-card {
-  position: relative; z-index: 1;
-  width: 280px; height: 540px;
-  background: rgba(255,255,255,0.55);
-  backdrop-filter: blur(22px) saturate(1.4);
-  -webkit-backdrop-filter: blur(22px) saturate(1.4);
-  border: 1px solid rgba(0,0,0,0.06);
-  border-left: none;
-  border-radius: 0 24px 24px 0;
-  padding: 28px 26px 28px 50px;
-  margin-left: -36px;
-  box-shadow: 0 30px 80px rgba(0,0,0,0.20);
-  display: flex; flex-direction: column;
-  overflow: hidden;
-}
-
-/* TOP – winner pill (gold gradient, shimmer) */
+/* Winner pill – sits inside .sp-bottom, above the quote (green gradient) */
 .hero--devin-v2 .sp-winner-pill {
   display: inline-flex; align-items: center; gap: 8px;
-  align-self: flex-start;
-  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+  background: linear-gradient(135deg, #4ade80 0%, #22c55e 50%, #15803d 100%);
   color: #fff;
   font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
-  padding: 9px 14px; border-radius: 980px;
-  box-shadow: 0 8px 22px rgba(245,158,11,.5), 0 1px 0 rgba(255,255,255,.4) inset;
+  padding: 7px 12px; border-radius: 980px;
+  box-shadow: 0 8px 22px rgba(34,197,94,.45), 0 1px 0 rgba(255,255,255,.4) inset;
   position: relative; overflow: hidden;
-  margin-bottom: 18px;
+  margin: 0 0 14px;
   white-space: nowrap;
+}
+
+/* BOTTOM – translucent content panel overlaid on the photo's lower portion */
+.hero--devin-v2 .sp-bottom {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(22px) saturate(1.4);
+  -webkit-backdrop-filter: blur(22px) saturate(1.4);
+  padding: 20px 24px 22px;
+  z-index: 2;
 }
 .hero--devin-v2 .sp-winner-pill svg { width: 13px; height: 13px; flex-shrink: 0; filter: drop-shadow(0 1px 1px rgba(0,0,0,.2)); }
 .hero--devin-v2 .sp-winner-pill::after {
@@ -2222,10 +2311,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 .hero--devin-v2 .sp-order-sub   { font-size: 13px; color: rgba(0,0,0,.5); line-height: 1.3; margin-top: 2px; }
 .hero--devin-v2 .sp-order-price { font-size: 15px; font-weight: 800; color: #15803d; letter-spacing: -0.01em; flex-shrink: 0; }
 
-/* BOTTOM – stars / quote / divider / name / meta */
-.hero--devin-v2 .sp-stars { display: inline-flex; gap: 1px; color: #fbbf24; font-size: 15px; margin-top: auto; margin-bottom: 10px; letter-spacing: 1px; }
-.hero--devin-v2 .sp-quote { font-size: 13.5px; line-height: 1.5; color: var(--c-near); letter-spacing: -0.005em; margin-bottom: 0; }
-.hero--devin-v2 .sp-divider { height: 1px; background: rgba(0,0,0,.12); margin: 14px 0; }
+/* BOTTOM – quote / divider / name / meta (inside .sp-bottom overlay) */
+.hero--devin-v2 .sp-quote { font-size: 14px; line-height: 1.5; color: var(--c-near); letter-spacing: -0.005em; margin: 0; }
+.hero--devin-v2 .sp-divider { height: 1px; background: rgba(0,0,0,.12); margin: 16px 0; }
 .hero--devin-v2 .sp-name { font-size: 14px; font-weight: 700; color: var(--c-near); letter-spacing: -0.01em; }
 .hero--devin-v2 .sp-meta { font-size: 12px; color: var(--c-gray2); margin-top: 8px; }
 .hero--devin-v2 .sp-meta .sp-flag { font-size: 1.4em; vertical-align: -2px; margin-left: 2px; }
@@ -2235,22 +2323,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 .hero--devin-v2 .sp-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,.25); transition: background .25s, width .25s; cursor: pointer; }
 .hero--devin-v2 .sp-dot.active { background: rgba(255,255,255,.85); width: 22px; border-radius: 3px; }
 
-/* Limited-time eyebrow strip */
+/* Limited-time eyebrow strip (green) */
 .hero--devin-v2 .limited {
   display: inline-flex; align-items: center; gap: 10px;
   font-family: var(--font-text); font-size: 12px; font-weight: 600;
   letter-spacing: 0.14em; text-transform: uppercase;
-  color: rgba(255,228,168,0.85);
+  color: rgba(220,252,231,0.95);
   padding: 8px 16px; margin-bottom: 22px; border-radius: 999px;
-  background: rgba(40,28,14,0.55);
-  border: 1px solid rgba(232,184,115,0.30);
+  background: rgba(15,40,25,0.55);
+  border: 1px solid rgba(34,197,94,0.40);
   backdrop-filter: blur(14px) saturate(1.3);
   -webkit-backdrop-filter: blur(14px) saturate(1.3);
   white-space: nowrap; width: max-content;
 }
 .hero--devin-v2 .limited .pulse {
   width: 7px; height: 7px; border-radius: 50%;
-  background: #f5a623; box-shadow: 0 0 12px rgba(245,166,35,0.85);
+  background: #22c55e; box-shadow: 0 0 12px rgba(34,197,94,0.85);
   animation: dvLdPulse 1.6s ease-in-out infinite;
 }
 @keyframes dvLdPulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.55;transform:scale(.8)} }
@@ -2267,8 +2355,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 .hero--devin-v2 .copy h1 .amber {
   font-style: normal; font-weight: 700;
   background: linear-gradient(90deg,
-    #b8862e 0%, #e8b873 18%, #f7e3a8 36%, #ffd576 54%,
-    #d4a04a 72%, #f0c977 88%, #b8862e 100%);
+    #15803d 0%, #22c55e 18%, #4ade80 36%, #86efac 54%,
+    #22c55e 72%, #4ade80 88%, #15803d 100%);
   background-size: 220% 100%; background-position: 0% 50%;
   -webkit-background-clip: text; background-clip: text;
   -webkit-text-fill-color: transparent; color: transparent;
@@ -2298,6 +2386,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   color: rgba(245, 225, 185, 0.55);
   letter-spacing: -0.005em;
   margin: 20px 0 0;
+  width: 358px;
+  max-width: 100%;
+  text-align: center;
 }
 .hero--devin-v2 .cta {
   display: inline-flex; align-items: center; justify-content: center;
@@ -2345,23 +2436,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 /* Responsive */
 @media (max-width: 980px) {
   .hero--devin-v2 .grid {
-    grid-template-columns: 1fr;
+    flex-direction: column;
+    justify-content: center;
     padding: 100px 32px 80px;
     gap: 48px;
     min-height: auto;
   }
-  .hero--devin-v2 .sp-slider { max-width: 100%; height: auto; order: 2; }
-  .hero--devin-v2 .sp-slide { grid-template-columns: 1fr; position: relative; inset: auto; }
-  .hero--devin-v2 .sp-slide:not(.sp-active) { display: none; }
-  .hero--devin-v2 .sp-photo { width: 100%; max-width: 360px; height: 460px; margin: 0 auto; }
-  .hero--devin-v2 .sp-card {
-    width: 100%; max-width: 320px;
-    margin: -28px auto 0;
-    height: auto;
-    padding: 28px 24px;
-    border-left: 1px solid rgba(0,0,0,0.06);
-    border-radius: 0 0 24px 24px;
-  }
+  .hero--devin-v2 .sp-slider { flex: 0 0 auto; max-width: 360px; order: 2; }
   .hero--devin-v2 .copy {
     padding-right: 0;
     order: 1;
@@ -2381,11 +2462,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 }
 @media (max-width: 480px) {
   .hero--devin-v2 .grid { padding: 88px 20px 64px; }
-  .hero--devin-v2 .sp-photo { height: 420px; }
+  .hero--devin-v2 .sp-slider { max-width: 320px; height: 480px; }
+  .hero--devin-v2 .sp-card { width: 320px; height: 480px; }
 }
 </style>
 
 <section class="hero hero--devin-v2" id="hero">
+  <div class="aurora" aria-hidden="true">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="blob b3"></div>
+    <div class="blob b4"></div>
+    <div class="blob b5"></div>
+  </div>
   <div class="vignette" aria-hidden="true"></div>
 
   <div class="grid">
@@ -2393,53 +2482,62 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="sp-slider" id="spSlider">
 
       <div class="sp-slide sp-active" data-idx="0">
-        <div class="sp-photo"><img src="img/social/p1.webp" alt="Marcus J., grant winner" loading="eager" decoding="async"></div>
         <div class="sp-card">
-          <span class="sp-winner-pill"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.39 6.96H22l-6.18 4.49L18.18 22 12 17.27 5.82 22l2.36-8.55L2 8.96h7.61z"/></svg>$5,000 Grant Winner</span>
+          <div class="sp-photo"><img src="img/social/p1.webp" alt="Marcus J., grant winner" loading="eager" decoding="async"></div>
+          <div class="sp-bottom">
+            <span class="sp-winner-pill"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.39 6.96H22l-6.18 4.49L18.18 22 12 17.27 5.82 22l2.36-8.55L2 8.96h7.61z"/></svg>$5,000 Grant Winner</span>
+            <p class="sp-quote">"The grant unlocked premium ad credit and a personal manager — within two months my store was doing 3-4 sales a day."</p>
+            <div class="sp-divider"></div>
+            <div class="sp-name">Marcus J.</div>
+            <div class="sp-meta">Former teacher · Atlanta, US</div>
+          </div>
+          <!-- ORDER PLATES (temporarily hidden – may be moved to another section)
           <div class="sp-orders">
             <div class="sp-order" data-pos="0"><div class="sp-order-icon"><img src="img/freebasic/p1_2x.webp" alt="" loading="lazy"></div><div class="sp-order-body"><div class="sp-order-title">First Home Buyer Kit</div><div class="sp-order-sub">Marcus from NY · just now</div></div><div class="sp-order-price">+$49</div></div>
             <div class="sp-order" data-pos="1"><div class="sp-order-icon"><img src="img/freebasic/p2_2x.webp" alt="" loading="lazy"></div><div class="sp-order-body"><div class="sp-order-title">Budget Planner</div><div class="sp-order-sub">Lisa from TX · 12s ago</div></div><div class="sp-order-price">+$29</div></div>
             <div class="sp-order" data-pos="2"><div class="sp-order-icon"><img src="img/freebasic/p3_2x.webp" alt="" loading="lazy"></div><div class="sp-order-body"><div class="sp-order-title">Career Guide</div><div class="sp-order-sub">Chris from FL · 38s ago</div></div><div class="sp-order-price">+$39</div></div>
           </div>
-          <div class="sp-stars">★★★★★</div>
-          <p class="sp-quote">"After being laid off, the grant let me stock my catalog with bestsellers. First sale came in within 48 hours."</p>
-          <div class="sp-divider"></div>
-          <div class="sp-name">Marcus J.</div>
-          <div class="sp-meta">Former teacher · Atlanta, US <span class="sp-flag">🇺🇸</span></div>
+          -->
         </div>
       </div>
 
       <div class="sp-slide" data-idx="1">
-        <div class="sp-photo"><img src="img/social/p2.webp" alt="Mei L., grant winner" loading="lazy"></div>
         <div class="sp-card">
-          <span class="sp-winner-pill"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.39 6.96H22l-6.18 4.49L18.18 22 12 17.27 5.82 22l2.36-8.55L2 8.96h7.61z"/></svg>$5,000 Grant Winner</span>
+          <div class="sp-photo"><img src="img/social/p2.webp" alt="Mei L., grant winner" loading="lazy"></div>
+          <div class="sp-bottom">
+            <span class="sp-winner-pill"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.39 6.96H22l-6.18 4.49L18.18 22 12 17.27 5.82 22l2.36-8.55L2 8.96h7.61z"/></svg>$5,000 Grant Winner</span>
+            <p class="sp-quote">"With the grant I added a curated bestseller pack and unlocked the marketing tools — sales jumped 40% the very next month."</p>
+            <div class="sp-divider"></div>
+            <div class="sp-name">Mei L.</div>
+            <div class="sp-meta">Boutique owner · Portland, US</div>
+          </div>
+          <!-- ORDER PLATES (temporarily hidden – may be moved to another section)
           <div class="sp-orders">
             <div class="sp-order" data-pos="0"><div class="sp-order-icon"><img src="img/freebasic/p4_2x.webp" alt="" loading="lazy"></div><div class="sp-order-body"><div class="sp-order-title">Handmade Candle Set</div><div class="sp-order-sub">Sarah from CA · just now</div></div><div class="sp-order-price">+$59</div></div>
             <div class="sp-order" data-pos="1"><div class="sp-order-icon"><img src="img/freebasic/p5_2x.webp" alt="" loading="lazy"></div><div class="sp-order-body"><div class="sp-order-title">Linen Cushion Cover</div><div class="sp-order-sub">Megan from WA · 18s ago</div></div><div class="sp-order-price">+$35</div></div>
             <div class="sp-order" data-pos="2"><div class="sp-order-icon"><img src="img/freebasic/p6_2x.webp" alt="" loading="lazy"></div><div class="sp-order-body"><div class="sp-order-title">Ceramic Mug</div><div class="sp-order-sub">Rachel from OR · 51s ago</div></div><div class="sp-order-price">+$24</div></div>
           </div>
-          <div class="sp-stars">★★★★★</div>
-          <p class="sp-quote">"The grant covered my first month of ads and packaging. I crossed $4K in revenue before the trial even ended."</p>
-          <div class="sp-divider"></div>
-          <div class="sp-name">Mei L.</div>
-          <div class="sp-meta">Boutique owner · Portland, US <span class="sp-flag">🇺🇸</span></div>
+          -->
         </div>
       </div>
 
       <div class="sp-slide" data-idx="2">
-        <div class="sp-photo"><img src="img/social/p3.webp" alt="Priya S., grant winner" loading="lazy"></div>
         <div class="sp-card">
-          <span class="sp-winner-pill"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.39 6.96H22l-6.18 4.49L18.18 22 12 17.27 5.82 22l2.36-8.55L2 8.96h7.61z"/></svg>$5,000 Grant Winner</span>
+          <div class="sp-photo"><img src="img/social/p3.webp" alt="Priya S., grant winner" loading="lazy"></div>
+          <div class="sp-bottom">
+            <span class="sp-winner-pill"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.39 6.96H22l-6.18 4.49L18.18 22 12 17.27 5.82 22l2.36-8.55L2 8.96h7.61z"/></svg>$5,000 Grant Winner</span>
+            <p class="sp-quote">"I was juggling kids and a part-time job. The $5,000 helped me launch tools that run my store while I sleep."</p>
+            <div class="sp-divider"></div>
+            <div class="sp-name">Priya S.</div>
+            <div class="sp-meta">Mom of two · Houston, US</div>
+          </div>
+          <!-- ORDER PLATES (temporarily hidden – may be moved to another section)
           <div class="sp-orders">
             <div class="sp-order" data-pos="0"><div class="sp-order-icon"><img src="img/freebasic/p7_2x.webp" alt="" loading="lazy"></div><div class="sp-order-body"><div class="sp-order-title">Self-Care Toolkit</div><div class="sp-order-sub">Olivia from NY · just now</div></div><div class="sp-order-price">+$49</div></div>
             <div class="sp-order" data-pos="1"><div class="sp-order-icon"><img src="img/freebasic/p8_2x.webp" alt="" loading="lazy"></div><div class="sp-order-body"><div class="sp-order-title">Healthy Meal Plan</div><div class="sp-order-sub">Jamie from IL · 22s ago</div></div><div class="sp-order-price">+$29</div></div>
             <div class="sp-order" data-pos="2"><div class="sp-order-icon"><img src="img/reviews/ksenia.webp" alt="" loading="lazy"></div><div class="sp-order-body"><div class="sp-order-title">Career Development</div><div class="sp-order-sub">Ava from GA · 47s ago</div></div><div class="sp-order-price">+$39</div></div>
           </div>
-          <div class="sp-stars">★★★★★</div>
-          <p class="sp-quote">"I was juggling kids and a part-time job. The $5,000 helped me launch tools that run my store while I sleep."</p>
-          <div class="sp-divider"></div>
-          <div class="sp-name">Priya S.</div>
-          <div class="sp-meta">Mom of two · Houston, US <span class="sp-flag">🇺🇸</span></div>
+          -->
         </div>
       </div>
 
@@ -2454,7 +2552,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="copy">
       <div class="limited">
         <span class="pulse"></span>
-        LIMITED TIME · $5,000 SMALL BUSINESS GRANT INCLUDED
+        LIMITED TIME · SMALL BUSINESS GRANT INCLUDED
       </div>
       <h1>
         Get a <span class="blue">free online store</span> and win a <span class="amber">$5,000 Grant</span> on top.
@@ -2479,7 +2577,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <script>
-/* Hero – social-proof slider: rotate winners every 9s, cascade order plates */
+/* Hero – 3-slide carousel: active center + prev/next peeking, rotate every 9s */
 ;(function(){
   const slider = document.getElementById('spSlider');
   if (!slider) return;
@@ -2490,24 +2588,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   let idx = 0, timer = null;
   const SLIDE_MS = 9000;
 
-  function animateOrders(slide) {
-    const orders = slide.querySelectorAll('.sp-order');
-    orders.forEach((o, i) => {
-      o.classList.remove('in');
-      void o.offsetWidth;
-      o.style.top = (i * 64) + 'px';
-      o.style.animationDelay = (i * 0.7) + 's';
-      o.classList.add('in');
-    });
-  }
   function activate(i) {
     idx = i;
-    slides.forEach((s, j) => s.classList.toggle('sp-active', j === i));
+    const prev = (i - 1 + N) % N;
+    const next = (i + 1) % N;
+    slides.forEach((s, j) => {
+      s.classList.remove('sp-active', 'sp-prev', 'sp-next');
+      if (j === i) s.classList.add('sp-active');
+      else if (j === prev) s.classList.add('sp-prev');
+      else if (j === next) s.classList.add('sp-next');
+    });
     dots.forEach((d, j) => d.classList.toggle('active', j === i));
-    animateOrders(slides[i]);
   }
   function start() { if (!timer) timer = setInterval(() => activate((idx + 1) % N), SLIDE_MS); }
   function stop()  { if (timer) { clearInterval(timer); timer = null; } }
+
+  // initial state – sets sp-prev / sp-next on adjacent slides
+  activate(0);
 
   dots.forEach((d, i) => d.addEventListener('click', () => { stop(); activate(i); start(); }));
   slider.addEventListener('mouseenter', stop);
@@ -2515,10 +2612,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) { animateOrders(slides[idx]); start(); } else stop(); });
+      entries.forEach(e => { if (e.isIntersecting) start(); else stop(); });
     }, { threshold: 0.2 });
     io.observe(slider);
-  } else { animateOrders(slides[0]); start(); }
+  } else { start(); }
 })();
 </script>
 
@@ -2935,23 +3032,253 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 @media(max-width:860px){
   .composition-stage { width: 100%; max-width: 480px; margin: 0 auto; }
 }
+
+/* ─────────────────────────────────────────────────────────────
+   PV2 – pillar-visual phone (light-inverted ecomzy variant)
+   White phone frame + portrait at top + notif area + 3 avatar
+   lanes behind phone scrolling toward each other, fading at edges.
+   ───────────────────────────────────────────────────────────── */
+.freebasic-section .pv2-stage {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  min-height: 620px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 3 lanes of avatars positioned BEHIND the phone, extending wider for fade-out */
+.pv2-lanes {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 130%;
+  height: 222px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,.15) 6%, #000 20%, #000 80%, rgba(0,0,0,.15) 94%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,.15) 6%, #000 20%, #000 80%, rgba(0,0,0,.15) 94%, transparent 100%);
+  pointer-events: none;
+}
+.pv2-lane {
+  position: relative;
+  width: 100%;
+  height: 60px;
+  overflow: hidden;
+}
+.pv2-track {
+  display: flex;
+  gap: 14px;
+  width: max-content;
+  will-change: transform;
+}
+.pv2-track.pv2-go-left  { animation: pv2ScrollLeft 28s linear infinite; }
+.pv2-track.pv2-go-right { animation: pv2ScrollRight 32s linear infinite; }
+.pv2-track.pv2-go-slow  { animation: pv2ScrollLeft 38s linear infinite; }
+
+@keyframes pv2ScrollLeft {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes pv2ScrollRight {
+  0%   { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.pv2-avatar {
+  flex-shrink: 0;
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 8px 22px rgba(0,0,0,.08), 0 0 0 4px #fff;
+}
+.pv2-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* Phone frame – pure white, no UI, sits in front of lanes */
+.pv2-phone {
+  position: relative;
+  width: 290px;
+  height: 580px;
+  background: #fff;
+  border-radius: 42px;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.12), 0 6px 18px rgba(0,0,0,0.06);
+  z-index: 2;
+}
+
+/* Big portrait of grant winner at the TOP of the phone */
+.pv2-phone-portrait {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 260px;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 78%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 78%, transparent 100%);
+}
+.pv2-phone-portrait img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center 25%;
+  display: block;
+}
+
+/* Notification area – shifted DOWN 140px from default top:0 */
+.pv2-notif-area {
+  position: absolute;
+  top: 230px;
+  left: 14px; right: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 3;
+}
+.pv2-notif {
+  background: rgba(245,245,247,0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 11px 13px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  opacity: 0;
+  animation: pv2NotifIn .55s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+.pv2-notif:nth-child(1) { animation-delay: 0.4s; }
+.pv2-notif:nth-child(2) { animation-delay: 1.0s; }
+.pv2-notif:nth-child(3) { animation-delay: 1.6s; }
+@keyframes pv2NotifIn {
+  0%   { opacity: 0; transform: translateY(-14px) scale(0.96); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.pv2-notif-row {
+  display: flex; align-items: center; gap: 10px;
+}
+.pv2-notif-dot {
+  flex-shrink: 0;
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  background: #CAF0D7;
+  color: #15803d;
+  font-size: 12px; font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  letter-spacing: -0.01em;
+}
+.pv2-notif-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: #1d1d1f;
+  letter-spacing: -0.01em;
+}
+.pv2-notif-time {
+  margin-left: auto;
+  font-size: 11px;
+  color: rgba(0,0,0,0.42);
+}
+.pv2-notif-body {
+  font-size: 12px;
+  color: rgba(0,0,0,0.65);
+  line-height: 1.35;
+  letter-spacing: -0.005em;
+}
+.pv2-notif-price { color: #15803d; font-weight: 700; }
+
+/* Mobile */
+@media (max-width: 860px) {
+  .freebasic-section .pv2-stage { min-height: 540px; max-width: 100%; }
+  .pv2-phone { width: 260px; height: 520px; }
+  .pv2-phone-portrait { height: 230px; }
+  .pv2-notif-area { top: 210px; }
+  .pv2-lanes { width: 130%; height: 200px; }
+  .pv2-avatar { width: 50px; height: 50px; }
+}
+@media (max-width: 480px) {
+  .pv2-phone { width: 240px; height: 480px; }
+  .pv2-phone-portrait { height: 210px; }
+  .pv2-notif-area { top: 195px; }
+  .pv2-avatar { width: 44px; height: 44px; }
+}
 </style>
 
 <section class="freebasic-section" id="freebasic">
   <div class="bonus-inner freebasic-inner">
 
-    <!-- LEFT – community composition: 8 customer avatars around a centered woman + two floating graphic cards -->
-    <div class="bonus-right composition-stage" aria-label="Customers happy with their stores">
-      <img class="comp-woman"                src="img/freebasic/woman.webp"   alt="" loading="lazy">
-      <img class="comp-graphic comp-grafic1" src="img/freebasic/grafic1.webp" alt="" loading="lazy">
-      <img class="comp-graphic comp-grafic2" src="img/freebasic/grafic2.webp" alt="" loading="lazy">
-      <img class="comp-avatar comp-p1" src="img/freebasic/p1_2x.webp" alt="" loading="lazy">
-      <img class="comp-avatar comp-p2" src="img/freebasic/p2_2x.webp" alt="" loading="lazy">
-      <img class="comp-avatar comp-p3" src="img/freebasic/p3_2x.webp" alt="" loading="lazy">
-      <img class="comp-avatar comp-p4" src="img/freebasic/p4_2x.webp" alt="" loading="lazy">
-      <img class="comp-avatar comp-p5" src="img/freebasic/p5_2x.webp" alt="" loading="lazy">
-      <img class="comp-avatar comp-p7" src="img/freebasic/p7_2x.webp" alt="" loading="lazy">
-      <img class="comp-avatar comp-p8" src="img/freebasic/p8_2x.webp" alt="" loading="lazy">
+    <!-- LEFT – pillar-visual: white phone with portrait + notifications, 3 avatar lanes scrolling behind -->
+    <div class="bonus-right pv2-stage" aria-label="Grant winners and live store orders">
+
+      <!-- 3 avatar lanes BEHIND the phone, scrolling toward each other, fading at edges -->
+      <div class="pv2-lanes" aria-hidden="true">
+        <div class="pv2-lane">
+          <div class="pv2-track pv2-go-left">
+            <div class="pv2-avatar"><img src="img/freebasic/p1_2x.webp" alt="" loading="lazy"></div>
+            <div class="pv2-avatar"><img src="img/freebasic/p2_2x.webp" alt="" loading="lazy"></div>
+            <div class="pv2-avatar"><img src="img/freebasic/p3_2x.webp" alt="" loading="lazy"></div>
+            <div class="pv2-avatar"><img src="img/freebasic/p1_2x.webp" alt="" loading="lazy"></div>
+            <div class="pv2-avatar"><img src="img/freebasic/p2_2x.webp" alt="" loading="lazy"></div>
+            <div class="pv2-avatar"><img src="img/freebasic/p3_2x.webp" alt="" loading="lazy"></div>
+          </div>
+        </div>
+        <div class="pv2-lane">
+          <div class="pv2-track pv2-go-right">
+            <div class="pv2-avatar"><img src="img/freebasic/p4_2x.webp" alt="" loading="lazy"></div>
+            <div class="pv2-avatar"><img src="img/freebasic/p5_2x.webp" alt="" loading="lazy"></div>
+            <div class="pv2-avatar"><img src="img/freebasic/p6_2x.webp" alt="" loading="lazy"></div>
+            <div class="pv2-avatar"><img src="img/freebasic/p4_2x.webp" alt="" loading="lazy"></div>
+            <div class="pv2-avatar"><img src="img/freebasic/p5_2x.webp" alt="" loading="lazy"></div>
+            <div class="pv2-avatar"><img src="img/freebasic/p6_2x.webp" alt="" loading="lazy"></div>
+          </div>
+        </div>
+        <div class="pv2-lane">
+          <div class="pv2-track pv2-go-slow">
+            <div class="pv2-avatar"><img src="img/freebasic/p7_2x.webp" alt="" loading="lazy"></div>
+            <div class="pv2-avatar"><img src="img/freebasic/p8_2x.webp" alt="" loading="lazy"></div>
+            <div class="pv2-avatar"><img src="img/reviews/ksenia.webp" alt="" loading="lazy"></div>
+            <div class="pv2-avatar"><img src="img/freebasic/p7_2x.webp" alt="" loading="lazy"></div>
+            <div class="pv2-avatar"><img src="img/freebasic/p8_2x.webp" alt="" loading="lazy"></div>
+            <div class="pv2-avatar"><img src="img/reviews/ksenia.webp" alt="" loading="lazy"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phone frame: pure white, no UI elements -->
+      <div class="pv2-phone">
+        <div class="pv2-phone-portrait">
+          <img src="img/freebasic/winner.webp" alt="Happy grant winner" loading="lazy">
+        </div>
+        <div class="pv2-notif-area">
+          <div class="pv2-notif">
+            <div class="pv2-notif-row">
+              <div class="pv2-notif-dot">M</div>
+              <div class="pv2-notif-name">Marcus from NY</div>
+              <div class="pv2-notif-time">just now</div>
+            </div>
+            <div class="pv2-notif-body">bought First Home Buyer Kit — <span class="pv2-notif-price">$49</span></div>
+          </div>
+          <div class="pv2-notif">
+            <div class="pv2-notif-row">
+              <div class="pv2-notif-dot">S</div>
+              <div class="pv2-notif-name">Sarah from CA</div>
+              <div class="pv2-notif-time">12s ago</div>
+            </div>
+            <div class="pv2-notif-body">bought Handmade Candle Set — <span class="pv2-notif-price">$59</span></div>
+          </div>
+          <div class="pv2-notif">
+            <div class="pv2-notif-row">
+              <div class="pv2-notif-dot">O</div>
+              <div class="pv2-notif-name">Olivia from NY</div>
+              <div class="pv2-notif-time">38s ago</div>
+            </div>
+            <div class="pv2-notif-body">bought Self-Care Toolkit — <span class="pv2-notif-price">$49</span></div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
     <!-- RIGHT (text) -->
