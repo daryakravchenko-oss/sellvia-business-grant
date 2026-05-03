@@ -1644,53 +1644,33 @@ section { padding: 120px 24px; }
 
 /* ════ FINAL CTA – echoes the Hero V2 gold-aurora vibe, brighter ════ */
 .final-sec {
-  background: #02040c;
+  background: #071F0B;
   padding: 140px 24px 130px;
   text-align: center;
   position: relative;
   overflow: hidden;
   isolation: isolate;
 }
-/* Hero-style gold aurora – same blob pattern as the hero, brighter (opacity .8) */
+/* Black blobs floating on dark green (multiply blend deepens the green) */
 .final-aurora {
   position: absolute; inset: -10%;
   z-index: 0; pointer-events: none;
-  filter: blur(80px) saturate(1.4);
-  opacity: 0.8;
+  filter: blur(80px) saturate(1.0);
+  opacity: 1;
 }
-.final-aurora .blob { position: absolute; border-radius: 50%; mix-blend-mode: screen; will-change: transform, opacity; }
+.final-aurora .blob { position: absolute; border-radius: 50%; will-change: transform, opacity; }
 .final-aurora .b1 { width: 60%; height: 65%; left: -10%; top: -15%;
-  background: radial-gradient(circle at center, #f0c977 0%, transparent 65%);
+  background: radial-gradient(circle at center, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 65%);
   animation: finalDrift1 22s ease-in-out infinite; }
 .final-aurora .b2 { width: 55%; height: 60%; right: -8%; top: -12%;
-  background: radial-gradient(circle at center, #ffd576 0%, transparent 65%);
+  background: radial-gradient(circle at center, rgba(0,0,0,0.50) 0%, rgba(0,0,0,0) 65%);
   animation: finalDrift2 26s ease-in-out infinite; }
 .final-aurora .b3 { width: 65%; height: 60%; left: 15%; bottom: -22%;
-  background: radial-gradient(circle at center, #d4a04a 0%, transparent 65%);
+  background: radial-gradient(circle at center, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 65%);
   animation: finalDrift3 30s ease-in-out infinite; }
-.final-aurora .b4 { width: 50%; height: 55%; right: 8%; bottom: -15%;
-  background: radial-gradient(circle at center, #e8b873 0%, transparent 65%);
-  animation: finalDrift4 34s ease-in-out infinite; }
-.final-aurora .b5 { width: 45%; height: 50%; left: 38%; top: 28%;
-  background: radial-gradient(circle at center, #b8862e 0%, transparent 65%);
-  animation: finalDrift5 28s ease-in-out infinite; }
 @keyframes finalDrift1 { 0%,100%{transform:translate(0,0)scale(1);opacity:1}    33%{transform:translate(10%,8%)scale(1.15);opacity:1.05} 66%{transform:translate(-5%,12%)scale(.95);opacity:.85} }
 @keyframes finalDrift2 { 0%,100%{transform:translate(0,0)scale(1);opacity:.85}  50%{transform:translate(-12%,10%)scale(1.18);opacity:1.05} }
 @keyframes finalDrift3 { 0%,100%{transform:translate(0,0)scale(1);opacity:.9}   40%{transform:translate(8%,-10%)scale(1.12);opacity:1.05} 70%{transform:translate(-10%,-5%)scale(.92);opacity:.75} }
-@keyframes finalDrift4 { 0%,100%{transform:translate(0,0)scale(1);opacity:.7}   50%{transform:translate(-14%,-12%)scale(1.2);opacity:1} }
-@keyframes finalDrift5 { 0%,100%{transform:translate(0,0)scale(.95);opacity:.65} 50%{transform:translate(10%,-7%)scale(1.12);opacity:.95} }
-
-/* Faint diagonal grid (matches hero) */
-.final-sec::before {
-  content: ''; position: absolute; inset: 0;
-  background-image:
-    linear-gradient(rgba(232,184,115,0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(232,184,115,0.05) 1px, transparent 1px);
-  background-size: 80px 80px;
-  -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 95%);
-          mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 95%);
-  z-index: 1; pointer-events: none;
-}
 
 /* Floating gold sparks (same as hero, mid-density) */
 .final-spark {
@@ -1720,22 +1700,10 @@ section { padding: 120px 24px; }
 @keyframes finalSpark4 { 0%,100%{transform:translate(0,0);opacity:.7} 50%{transform:translate(-80px,-80px);opacity:1} }
 
 /* Soft vignette to keep edges dark (matches hero) */
-.final-vignette {
-  position: absolute; inset: 0; z-index: 1; pointer-events: none;
-  background:
-    radial-gradient(ellipse 80% 60% at 50% 50%, transparent 0%, rgba(2,4,12,0.55) 100%),
-    linear-gradient(180deg, rgba(2,4,12,0.25) 0%, transparent 30%, transparent 70%, rgba(2,4,12,0.45) 100%);
-}
-
-/* Legacy .final-glow still rendered – keep it as a soft top crown */
-.final-glow {
-  position: absolute;
-  top: -50px; left: 50%; transform: translateX(-50%);
-  width: 800px; height: 500px;
-  background: radial-gradient(ellipse at center top, rgba(245,166,35,0.20) 0%, transparent 70%);
-  pointer-events: none;
-  z-index: 1;
-}
+.final-vignette,
+.final-glow,
+.final-sec .floater,
+.final-aurora { display: none; }
 .final-in { position: relative; z-index: 3; max-width: 720px; margin: 0 auto; }
 .final-h2 {
   font-size: clamp(44px, 7vw, 80px);
@@ -1814,6 +1782,76 @@ section { padding: 120px 24px; }
   .final-sec .floater { display: none; }
 }
 @media(max-width:480px) { .final-sec { padding: 56px 16px; } }
+
+/* ════ MOBILE BUNDLE FIXES (≤860 / ≤760) ════ */
+.m-only-br { display: none; }
+
+@media (max-width: 860px) {
+  /* Hero – limited pill wraps to 2 lines, copy↔slider gap doubled */
+  .m-only-br { display: inline; }
+  .hero--devin-v2 .grid { gap: 96px; }
+  .hero--devin-v2 .limited {
+    white-space: normal;
+    text-align: center;
+    line-height: 1.55;
+    max-width: 320px;
+    padding: 10px 16px;
+  }
+  .hero--devin-v2 .limited { gap: 5px !important; align-items: flex-start; }
+  .hero--devin-v2 .limited .pulse { align-self: flex-start; margin-top: 7px; }
+  /* Topbar badge stacks $5,000 / GRANT in 2 lines on mobile */
+  .topbar-badge {
+    display: inline-flex !important;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1.1;
+    padding: 4px 10px;
+  }
+  .topbar-badge .tb-sep { display: none; }
+  .hero--devin-v2 .sp-slider { margin: 0 auto; }
+
+  /* Bonus-section – center bonus-right within column */
+  .bonus-section .bonus-right { width: 100%; max-width: 380px; margin: 0 auto; }
+
+  /* Bonus-section card lower positions on mobile */
+  .bonus-section .panel[data-idx="0"] .lcard.float-a { bottom: 38px !important; }
+  .bonus-section .panel[data-idx="1"] .lcard.float-a { bottom: 38px !important; }
+  .bonus-section .panel[data-idx="2"] .lcard.lcard-bl { bottom: 8px !important; }
+
+  /* Freebasic – pv2-stage matches phone height with small buffer */
+  .freebasic-section .bonus-right.pv2-stage {
+    aspect-ratio: auto !important;
+    height: auto !important;
+    min-height: 540px !important;
+    max-width: 380px !important;
+    overflow: visible !important;
+  }
+  .freebasic-section .freebasic-inner { gap: 72px !important; }
+  /* Notif-area extends to phone bottom; mobile card height ~85px → slots of 88px (3px gap) */
+  .pv2-notif-area { height: 280px !important; }
+  .pv2-notif { animation-name: pv2NotifCycleMobile !important; }
+  /* Force notif body to 2 lines on mobile (price goes to its own line) */
+  .pv2-notif-price { display: block; margin-top: 2px; }
+
+  /* Hero – center sp-card horizontally inside sp-slide */
+  .hero--devin-v2 .sp-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* how-sec – heading 3 lines, steps single column 358px wide */
+  .how-sec .sec-in-wide { padding-left: 0 !important; padding-right: 0 !important; }
+  .how-sec .how-steps {
+    grid-template-columns: 1fr;
+    max-width: 358px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .how-sec .how-step:nth-child(2n) { border-left: none; }
+  .how-sec .how-step + .how-step { border-top: 1px solid rgba(0,0,0,0.06); }
+}
+/* ════ END MOBILE BUNDLE FIXES ════ */
 
 /* ════ FOOTER ════ */
 footer { background: #000; border-top: 1px solid rgba(255,255,255,0.08); }
@@ -2052,8 +2090,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 }
 </style>
 <a href="https://sellvia.com/checkout/?product=custom&type_custom=free_basic_hosting" class="topbar">
-  <span class="topbar-badge">$5,000 · GRANT</span>
-  <span class="topbar-text">Get your FREE store + chance to win a $5,000 Small Business Grant!<span class="topbar-arrow">→</span></span>
+  <span class="topbar-badge"><span class="tb-num">$5,000</span><span class="tb-sep"> · </span><span class="tb-grant">GRANT</span></span>
+  <span class="topbar-text">Get your FREE store + win a $5,000 Grant!<span class="topbar-arrow">→</span></span>
 </a>
 
 <!-- ═══ NAV ═══ -->
@@ -2159,6 +2197,30 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   50%      { transform: translate(40px, 60px) scale(1.05); opacity: 1; }
   75%      { transform: translate(-30px, 50px) scale(0.95); opacity: 0.4; }
 }
+/* Hero gold sparks – mirror final-sec sparks */
+.hero--devin-v2 .hero-spark {
+  position: absolute; pointer-events: none; border-radius: 50%;
+  mix-blend-mode: screen; will-change: transform, opacity;
+  animation-timing-function: ease-in-out; animation-iteration-count: infinite;
+  z-index: 2;
+}
+.hero--devin-v2 .hero-spark.s1 { left: 8%; top: 28%; width: 14px; height: 14px;
+  background: radial-gradient(circle, #f4d28a 0%, rgba(244,210,138,.35) 35%, transparent 70%);
+  box-shadow: 0 0 26px 7px rgba(244,210,138,.5);
+  animation-name: finalSpark1; animation-duration: 18s; }
+.hero--devin-v2 .hero-spark.s2 { right: 14%; top: 18%; width: 10px; height: 10px;
+  background: radial-gradient(circle, #e8b873 0%, rgba(232,184,115,.35) 35%, transparent 70%);
+  box-shadow: 0 0 22px 6px rgba(232,184,115,.45);
+  animation-name: finalSpark2; animation-duration: 22s; }
+.hero--devin-v2 .hero-spark.s3 { left: 22%; bottom: 16%; width: 8px; height: 8px;
+  background: radial-gradient(circle, #fff0c8 0%, rgba(255,240,200,.4) 35%, transparent 70%);
+  box-shadow: 0 0 18px 5px rgba(255,240,200,.55);
+  animation-name: finalSpark3; animation-duration: 26s; }
+.hero--devin-v2 .hero-spark.s4 { right: 20%; bottom: 24%; width: 16px; height: 16px;
+  background: radial-gradient(circle, #d4a04a 0%, rgba(212,160,74,.3) 35%, transparent 70%);
+  box-shadow: 0 0 30px 8px rgba(212,160,74,.4);
+  animation-name: finalSpark4; animation-duration: 30s; }
+
 @keyframes orbFloat {
   0%, 100% { transform: translate(0, 0); opacity: 1; }
   25%      { transform: translate(35px, -25px); opacity: 0.4; }
@@ -2362,7 +2424,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 .hero--devin-v2 .lede {
   font-family: var(--font-text);
   font-size: clamp(15px, 1.3vw, 18px); line-height: 1.55;
-  color: #86868b; max-width: 460px;
+  color: #ffffff; max-width: 460px;
   margin: 0 0 36px; letter-spacing: -0.005em; text-wrap: pretty;
 }
 /* Action row: primary CTA + secondary text link, sitting in the copy
@@ -2376,7 +2438,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 }
 .hero--devin-v2 .cta-fine {
   font-size: 13px;
-  color: #86868b;
+  color: #ffffff;
   letter-spacing: -0.005em;
   margin: 20px 0 0;
   width: 358px;
@@ -2468,6 +2530,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="blob b4"></div>
   </div>
   <div class="vignette" aria-hidden="true"></div>
+  <span class="hero-spark s1" aria-hidden="true"></span>
+  <span class="hero-spark s2" aria-hidden="true"></span>
+  <span class="hero-spark s3" aria-hidden="true"></span>
+  <span class="hero-spark s4" aria-hidden="true"></span>
 
   <div class="grid">
     <!-- LEFT – social-proof slider (3 grant winners) -->
@@ -2544,7 +2610,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="copy">
       <div class="limited">
         <span class="pulse"></span>
-        LIMITED TIME · SMALL BUSINESS GRANT INCLUDED
+        <span class="limited-text">LIMITED TIME ·<br class="m-only-br"> SMALL BUSINESS GRANT INCLUDED</span>
       </div>
       <h1>
         Get a <span class="blue">free online store</span> and win a <span class="amber">$5,000 Grant</span> on top.
@@ -3053,7 +3119,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   position: absolute;
   inset: 5% -8% 5% -8%;
   background-image: url('img/freebasic/chart-line.webp');
-  background-size: 100% auto;
+  background-size: 80% auto;
   background-repeat: no-repeat;
   background-position: center 60%;
   z-index: 0;
@@ -3105,21 +3171,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   position: absolute;
   inset: 0;
   overflow: hidden;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 5%, #000 50%, transparent 60%);
-  mask-image: linear-gradient(to bottom, transparent 0%, #000 5%, #000 50%, transparent 60%);
 }
 .pv2-phone-portrait img {
   width: 100%; height: 100%;
-  object-fit: cover; object-position: center top;
-  transform: scale(3.4);
-  transform-origin: center 20%;
+  object-fit: cover; object-position: center;
   display: block;
 }
 .pv2-phone-portrait::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.18) 35%, rgba(0,0,0,0.35) 50%, transparent 60%);
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.18) 50%, rgba(0,0,0,0.40) 100%);
   pointer-events: none;
   z-index: 2;
 }
@@ -3166,6 +3228,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   56%          { opacity: 0; transform: translateY(220px); }
   100%         { opacity: 0; transform: translateY(220px); }
 }
+/* Mobile keyframe – wider 88px slots since cards wrap to 2 lines on narrow phone */
+@keyframes pv2NotifCycleMobile {
+  0%, 1%       { opacity: 0; transform: translateY(-50px); }
+  3%           { opacity: 0.8; transform: translateY(0); }
+  16.67%       { opacity: 0.8; transform: translateY(0); }
+  20%          { opacity: 0.8; transform: translateY(88px); }
+  33.33%       { opacity: 0.8; transform: translateY(88px); }
+  36.67%       { opacity: 0.8; transform: translateY(176px); }
+  50%          { opacity: 0.8; transform: translateY(176px); }
+  56%          { opacity: 0; transform: translateY(260px); }
+  100%         { opacity: 0; transform: translateY(260px); }
+}
 .pv2-notif-row {
   display: flex; align-items: center; gap: 10px;
 }
@@ -3206,7 +3280,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 }
 @media (max-width: 480px) {
   .pv2-phone { width: 240px; height: 480px; }
-  .pv2-notif-area { top: 220px; height: 230px; }
+  .pv2-notif-area { top: 220px; height: 260px !important; }
+  .freebasic-section .bonus-right.pv2-stage { min-height: 500px !important; }
 }
 </style>
 
@@ -3818,7 +3893,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="sec-in-wide" style="padding:0 24px">
     <div class="appear" style="text-align:center">
       <div class="sec-label">How it works</div>
-      <h2 class="sec-title-xl on-light">From zero to a $5,000 grant<br>in 4 simple steps.</h2>
+      <h2 class="sec-title-xl on-light">From zero<br class="m-only-br"> to a $5,000 grant<br>in 4 simple steps.</h2>
       <p class="sec-body" style="max-width:540px;margin:0 auto">No experience, no tech skills, no inventory needed.</p>
     </div>
     <div class="how-steps">
@@ -4561,25 +4636,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- ═══ FINAL CTA ═══ -->
 <section class="final-sec">
-  <!-- Hero-style gold aurora behind the CTA – brighter than hero (opacity .8) -->
+  <!-- 3 black blobs floating on the clean dark-green base -->
   <div class="final-aurora" aria-hidden="true">
     <div class="blob b1"></div>
     <div class="blob b2"></div>
     <div class="blob b3"></div>
-    <div class="blob b4"></div>
-    <div class="blob b5"></div>
   </div>
-  <div class="final-vignette" aria-hidden="true"></div>
   <span class="final-spark s1" aria-hidden="true"></span>
   <span class="final-spark s2" aria-hidden="true"></span>
   <span class="final-spark s3" aria-hidden="true"></span>
   <span class="final-spark s4" aria-hidden="true"></span>
-  <div class="final-glow"></div>
-  <img class="floater f1" src="https://work1.sellvia.com/images/7305.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
-  <img class="floater f3" src="https://work1.sellvia.com/images/7307.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
   <div class="final-in">
-    <h2 class="final-h2 appear">This could be the day<br>everything changes.</h2>
-    <p class="final-sub appear d1">Your store, your products, your $5,000 Small Business Grant – ready to go.</p>
+    <h2 class="final-h2 appear">Win the grant.<br>Keep the store.</h2>
+    <p class="final-sub appear d1">Free 14-day trial — auto-entered the moment your store goes live.</p>
     <div class="final-btns appear d2">
       <a href="https://sellvia.com/checkout/?product=custom&type_custom=free_basic_hosting" class="btn btn-filled">Get my free store + $5,000 Grant</a>
     </div>
