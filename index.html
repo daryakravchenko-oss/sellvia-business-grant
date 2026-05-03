@@ -680,8 +680,8 @@ button { cursor: pointer; font-family: var(--font); outline: none; border: none;
 .btn-filled-dark { background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2); }
 .btn-filled-dark:hover { background: rgba(255,255,255,0.2); }
 
-/* ════ STAT BAR – Apple-style strip between hero and freebasic ════ */
-.stat-bar { background: #1d1d1f; padding: 40px 24px; }
+/* ════ STAT BAR – continuous with hero (same #1d1d1f bg) ════ */
+.stat-bar { background: #1d1d1f; padding: 20px 24px 40px; }
 .stat-bar-inner {
   max-width: var(--max);
   margin: 0 auto;
@@ -2127,23 +2127,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   top: -180px; left: -160px;
   background: radial-gradient(circle, rgba(251,191,36,0.55) 0%, rgba(251,191,36,0) 65%);
   filter: blur(80px);
-  animation: orbAurora 20s ease-in-out infinite;
+  animation: orbAurora 12s ease-in-out infinite;
 }
-/* Top-right – gold solid orb */
+/* Top-right – dark green (was gold; matches b3) */
 .hero--devin-v2 .aurora .b2 {
   width: 620px; height: 520px;
   top: -200px; right: -140px;
-  background: rgba(245,158,11,0.45);
+  background: rgba(21,128,61,0.55);
   filter: blur(70px);
-  animation: orbFloat 20s ease-in-out infinite;
+  animation: orbFloat 12s ease-in-out infinite;
 }
-/* Mid-left, behind slider – green orb (matches pill green) */
+/* Mid-left, behind slider – darker green */
 .hero--devin-v2 .aurora .b3 {
   width: 520px; height: 520px;
   top: 32%; left: -140px;
-  background: rgba(34,197,94,0.50);
+  background: rgba(21,128,61,0.60);
   filter: blur(80px);
-  animation: orbFloat 16s ease-in-out -3s infinite reverse;
+  animation: orbFloat 9.6s ease-in-out -2s infinite reverse;
 }
 /* Bottom-right BIG asymmetric – gold */
 .hero--devin-v2 .aurora .b4 {
@@ -2151,26 +2151,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   bottom: -240px; right: -200px;
   background: rgba(245,158,11,0.42);
   filter: blur(100px);
-  animation: orbFloat 24s ease-in-out -6s infinite;
-}
-/* Bottom-center-left – green */
-.hero--devin-v2 .aurora .b5 {
-  width: 540px; height: 520px;
-  bottom: -180px; left: 22%;
-  background: rgba(34,197,94,0.45);
-  filter: blur(85px);
-  animation: orbFloat 18s ease-in-out -9s infinite reverse;
+  animation: orbFloat 14.4s ease-in-out -4s infinite;
 }
 @keyframes orbAurora {
   0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.9; }
-  33%      { transform: translate(40px, 50px) scale(1.08); opacity: 1; }
-  66%      { transform: translate(-30px, 70px) scale(0.95); opacity: 0.75; }
+  25%      { transform: translate(30px, 40px) scale(1.08); opacity: 0.45; }
+  50%      { transform: translate(40px, 60px) scale(1.05); opacity: 1; }
+  75%      { transform: translate(-30px, 50px) scale(0.95); opacity: 0.4; }
 }
 @keyframes orbFloat {
-  0%, 100% { transform: translate(0, 0); }
-  25%      { transform: translate(35px, -25px); }
-  50%      { transform: translate(55px, 30px); }
-  75%      { transform: translate(-20px, 45px); }
+  0%, 100% { transform: translate(0, 0); opacity: 1; }
+  25%      { transform: translate(35px, -25px); opacity: 0.4; }
+  50%      { transform: translate(55px, 30px); opacity: 0.95; }
+  75%      { transform: translate(-20px, 45px); opacity: 0.35; }
 }
 
 /* Layout: 2-column */
@@ -2369,7 +2362,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 .hero--devin-v2 .lede {
   font-family: var(--font-text);
   font-size: clamp(15px, 1.3vw, 18px); line-height: 1.55;
-  color: rgba(245,225,185,0.78); max-width: 460px;
+  color: #86868b; max-width: 460px;
   margin: 0 0 36px; letter-spacing: -0.005em; text-wrap: pretty;
 }
 /* Action row: primary CTA + secondary text link, sitting in the copy
@@ -2383,7 +2376,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 }
 .hero--devin-v2 .cta-fine {
   font-size: 13px;
-  color: rgba(245, 225, 185, 0.55);
+  color: #86868b;
   letter-spacing: -0.005em;
   margin: 20px 0 0;
   width: 358px;
@@ -2473,7 +2466,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="blob b2"></div>
     <div class="blob b3"></div>
     <div class="blob b4"></div>
-    <div class="blob b5"></div>
   </div>
   <div class="vignette" aria-hidden="true"></div>
 
@@ -3038,69 +3030,64 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
    White phone frame + portrait at top + notif area + 3 avatar
    lanes behind phone scrolling toward each other, fading at edges.
    ───────────────────────────────────────────────────────────── */
-.freebasic-section .pv2-stage {
+.freebasic-section .bonus-right.pv2-stage {
   position: relative;
   width: 100%;
-  max-width: 560px;
-  min-height: 620px;
+  max-width: 640px;
+  aspect-ratio: 1 / 1;
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
+  height: auto;
+  background: transparent;
+  border-radius: 0;
+  overflow: visible;
+  opacity: 1;
+  animation: none;
+  min-height: 0;
 }
 
-/* 3 lanes of avatars positioned BEHIND the phone, extending wider for fade-out */
-.pv2-lanes {
+/* Background chart line behind everything – static */
+.pv2-bg-line {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 130%;
-  height: 222px;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,.15) 6%, #000 20%, #000 80%, rgba(0,0,0,.15) 94%, transparent 100%);
-  mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,.15) 6%, #000 20%, #000 80%, rgba(0,0,0,.15) 94%, transparent 100%);
+  inset: 5% -8% 5% -8%;
+  background-image: url('img/freebasic/chart-line.webp');
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  background-position: center 60%;
+  z-index: 0;
   pointer-events: none;
 }
-.pv2-lane {
-  position: relative;
-  width: 100%;
-  height: 60px;
-  overflow: hidden;
-}
-.pv2-track {
-  display: flex;
-  gap: 14px;
-  width: max-content;
+
+/* Background avatars positioned around the phone (replaces lanes; comp-* layout) */
+.pv2-bg-avatar {
+  position: absolute;
+  border-radius: 50%;
+  object-fit: cover;
+  aspect-ratio: 1 / 1;
+  filter: blur(2.5px);
+  z-index: 1;
   will-change: transform;
 }
-.pv2-track.pv2-go-left  { animation: pv2ScrollLeft 28s linear infinite; }
-.pv2-track.pv2-go-right { animation: pv2ScrollRight 32s linear infinite; }
-.pv2-track.pv2-go-slow  { animation: pv2ScrollLeft 38s linear infinite; }
-
-@keyframes pv2ScrollLeft {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+.pv2-bg-p1 { top: calc(8% - 7px);  left: 9%;   width: 17%;   animation: compPulse 4.2s ease-in-out 0s     infinite; }
+.pv2-bg-p3 { top: calc(10% - 7px); left: 80%;  width: 13%;   animation: compPulse 4.6s ease-in-out -2s    infinite; }
+.pv2-bg-p4 { top: 38%;             left: 4%;   width: 8%;    animation: compPulse 4.8s ease-in-out -1.5s  infinite; }
+.pv2-bg-p8 { top: 80%;             left: 26%;  width: 11%;   animation: compPulse 5.0s ease-in-out -1.7s  infinite; }
+/* p2 moved: under p4 by ~250px (top 77%), placed on the LEFT */
+/* 2 emerging avatars (p2 + p5) – pull out from behind the phone, blur stays constant */
+.pv2-bg-p2,
+.pv2-bg-p5 { animation: pv2Emerge 7s ease-in-out infinite; }
+.pv2-bg-p2 { top: 77%; left: 6%;  width: 12%; animation-delay: 0s; }
+.pv2-bg-p5 { top: 52%; left: 84%; width: 9%;  animation-delay: -3s; }
+@keyframes pv2Emerge {
+  0%, 100% { transform: scale(0.55); opacity: 0.35; }
+  45%      { transform: scale(1.25); opacity: 1; }
+  60%      { transform: scale(1.25); opacity: 1; }
 }
-@keyframes pv2ScrollRight {
-  0%   { transform: translateX(-50%); }
-  100% { transform: translateX(0); }
-}
+@media (prefers-reduced-motion: reduce) { .pv2-bg-avatar { animation: none; } }
 
-.pv2-avatar {
-  flex-shrink: 0;
-  width: 56px; height: 56px;
-  border-radius: 50%;
-  overflow: hidden;
-  background: #fff;
-  box-shadow: 0 8px 22px rgba(0,0,0,.08), 0 0 0 4px #fff;
-}
-.pv2-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-/* Phone frame – pure white, no UI, sits in front of lanes */
+/* Phone frame – pure white, no UI, sits in front of bg avatars; softer shadow */
 .pv2-phone {
   position: relative;
   width: 290px;
@@ -3108,39 +3095,50 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   background: #fff;
   border-radius: 42px;
   overflow: hidden;
-  box-shadow: 0 30px 80px rgba(0,0,0,0.12), 0 6px 18px rgba(0,0,0,0.06);
+  box-shadow: 0 18px 44px rgba(0,0,0,0.08);
   z-index: 2;
 }
 
-/* Big portrait of grant winner at the TOP of the phone */
+/* Portrait fills the ENTIRE phone, scaled 2x (head at top, mid-thigh visible),
+   with smooth top/bottom mask fade and a black bottom-up gradient overlay */
 .pv2-phone-portrait {
   position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 260px;
+  inset: 0;
   overflow: hidden;
-  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 78%, transparent 100%);
-  mask-image: linear-gradient(to bottom, #000 0%, #000 78%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 5%, #000 50%, transparent 60%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 5%, #000 50%, transparent 60%);
 }
 .pv2-phone-portrait img {
   width: 100%; height: 100%;
-  object-fit: cover; object-position: center 25%;
+  object-fit: cover; object-position: center top;
+  transform: scale(3.4);
+  transform-origin: center 20%;
   display: block;
 }
+.pv2-phone-portrait::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.18) 35%, rgba(0,0,0,0.35) 50%, transparent 60%);
+  pointer-events: none;
+  z-index: 2;
+}
 
-/* Notification area – shifted DOWN 140px from default top:0 */
+/* Notification area – cards descend stepwise below the man's portrait */
 .pv2-notif-area {
   position: absolute;
-  top: 230px;
+  top: 320px;
   left: 14px; right: 14px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  height: 240px;
   z-index: 3;
+  pointer-events: none;
 }
 .pv2-notif {
-  background: rgba(245,245,247,0.92);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  background: rgba(245,245,247,0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-radius: 16px;
   padding: 11px 13px;
   display: flex;
@@ -3148,14 +3146,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   gap: 5px;
   box-shadow: 0 1px 2px rgba(0,0,0,0.05);
   opacity: 0;
-  animation: pv2NotifIn .55s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation: pv2NotifCycle 18s ease-in-out infinite;
 }
-.pv2-notif:nth-child(1) { animation-delay: 0.4s; }
-.pv2-notif:nth-child(2) { animation-delay: 1.0s; }
-.pv2-notif:nth-child(3) { animation-delay: 1.6s; }
-@keyframes pv2NotifIn {
-  0%   { opacity: 0; transform: translateY(-14px) scale(0.96); }
-  100% { opacity: 1; transform: translateY(0) scale(1); }
+.pv2-notif:nth-child(1) { animation-delay: 0s; }
+.pv2-notif:nth-child(2) { animation-delay: 3s; }
+.pv2-notif:nth-child(3) { animation-delay: 6s; }
+.pv2-notif:nth-child(4) { animation-delay: 9s; }
+.pv2-notif:nth-child(5) { animation-delay: 12s; }
+.pv2-notif:nth-child(6) { animation-delay: 15s; }
+/* Stepwise descent: 3 slots, 73px between each (= card height + 3px gap) */
+@keyframes pv2NotifCycle {
+  0%, 1%       { opacity: 0; transform: translateY(-50px); }
+  3%           { opacity: 0.8; transform: translateY(0); }
+  16.67%       { opacity: 0.8; transform: translateY(0); }
+  20%          { opacity: 0.8; transform: translateY(73px); }
+  33.33%       { opacity: 0.8; transform: translateY(73px); }
+  36.67%       { opacity: 0.8; transform: translateY(146px); }
+  50%          { opacity: 0.8; transform: translateY(146px); }
+  56%          { opacity: 0; transform: translateY(220px); }
+  100%         { opacity: 0; transform: translateY(220px); }
 }
 .pv2-notif-row {
   display: flex; align-items: center; gap: 10px;
@@ -3191,60 +3200,32 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 /* Mobile */
 @media (max-width: 860px) {
-  .freebasic-section .pv2-stage { min-height: 540px; max-width: 100%; }
+  .freebasic-section .pv2-stage { max-width: 480px; }
   .pv2-phone { width: 260px; height: 520px; }
-  .pv2-phone-portrait { height: 230px; }
-  .pv2-notif-area { top: 210px; }
-  .pv2-lanes { width: 130%; height: 200px; }
-  .pv2-avatar { width: 50px; height: 50px; }
+  .pv2-notif-area { top: 240px; height: 250px; }
 }
 @media (max-width: 480px) {
   .pv2-phone { width: 240px; height: 480px; }
-  .pv2-phone-portrait { height: 210px; }
-  .pv2-notif-area { top: 195px; }
-  .pv2-avatar { width: 44px; height: 44px; }
+  .pv2-notif-area { top: 220px; height: 230px; }
 }
 </style>
 
 <section class="freebasic-section" id="freebasic">
   <div class="bonus-inner freebasic-inner">
 
-    <!-- LEFT – pillar-visual: white phone with portrait + notifications, 3 avatar lanes scrolling behind -->
+    <!-- LEFT – pillar-visual: white phone with portrait + notifications, avatar circles + chart line behind -->
     <div class="bonus-right pv2-stage" aria-label="Grant winners and live store orders">
 
-      <!-- 3 avatar lanes BEHIND the phone, scrolling toward each other, fading at edges -->
-      <div class="pv2-lanes" aria-hidden="true">
-        <div class="pv2-lane">
-          <div class="pv2-track pv2-go-left">
-            <div class="pv2-avatar"><img src="img/freebasic/p1_2x.webp" alt="" loading="lazy"></div>
-            <div class="pv2-avatar"><img src="img/freebasic/p2_2x.webp" alt="" loading="lazy"></div>
-            <div class="pv2-avatar"><img src="img/freebasic/p3_2x.webp" alt="" loading="lazy"></div>
-            <div class="pv2-avatar"><img src="img/freebasic/p1_2x.webp" alt="" loading="lazy"></div>
-            <div class="pv2-avatar"><img src="img/freebasic/p2_2x.webp" alt="" loading="lazy"></div>
-            <div class="pv2-avatar"><img src="img/freebasic/p3_2x.webp" alt="" loading="lazy"></div>
-          </div>
-        </div>
-        <div class="pv2-lane">
-          <div class="pv2-track pv2-go-right">
-            <div class="pv2-avatar"><img src="img/freebasic/p4_2x.webp" alt="" loading="lazy"></div>
-            <div class="pv2-avatar"><img src="img/freebasic/p5_2x.webp" alt="" loading="lazy"></div>
-            <div class="pv2-avatar"><img src="img/freebasic/p6_2x.webp" alt="" loading="lazy"></div>
-            <div class="pv2-avatar"><img src="img/freebasic/p4_2x.webp" alt="" loading="lazy"></div>
-            <div class="pv2-avatar"><img src="img/freebasic/p5_2x.webp" alt="" loading="lazy"></div>
-            <div class="pv2-avatar"><img src="img/freebasic/p6_2x.webp" alt="" loading="lazy"></div>
-          </div>
-        </div>
-        <div class="pv2-lane">
-          <div class="pv2-track pv2-go-slow">
-            <div class="pv2-avatar"><img src="img/freebasic/p7_2x.webp" alt="" loading="lazy"></div>
-            <div class="pv2-avatar"><img src="img/freebasic/p8_2x.webp" alt="" loading="lazy"></div>
-            <div class="pv2-avatar"><img src="img/reviews/ksenia.webp" alt="" loading="lazy"></div>
-            <div class="pv2-avatar"><img src="img/freebasic/p7_2x.webp" alt="" loading="lazy"></div>
-            <div class="pv2-avatar"><img src="img/freebasic/p8_2x.webp" alt="" loading="lazy"></div>
-            <div class="pv2-avatar"><img src="img/reviews/ksenia.webp" alt="" loading="lazy"></div>
-          </div>
-        </div>
-      </div>
+      <!-- Rising chart line (lowest layer behind everything) -->
+      <div class="pv2-bg-line" aria-hidden="true"></div>
+
+      <!-- Background avatars positioned around the phone (legacy comp-* layout) -->
+      <img class="pv2-bg-avatar pv2-bg-p1" src="img/freebasic/p1_2x.webp" alt="" loading="lazy" aria-hidden="true">
+      <img class="pv2-bg-avatar pv2-bg-p2" src="img/freebasic/p2_2x.webp" alt="" loading="lazy" aria-hidden="true">
+      <img class="pv2-bg-avatar pv2-bg-p3" src="img/freebasic/p3_2x.webp" alt="" loading="lazy" aria-hidden="true">
+      <img class="pv2-bg-avatar pv2-bg-p4" src="img/freebasic/p4_2x.webp" alt="" loading="lazy" aria-hidden="true">
+      <img class="pv2-bg-avatar pv2-bg-p5" src="img/freebasic/p5_2x.webp" alt="" loading="lazy" aria-hidden="true">
+      <img class="pv2-bg-avatar pv2-bg-p8" src="img/freebasic/p8_2x.webp" alt="" loading="lazy" aria-hidden="true">
 
       <!-- Phone frame: pure white, no UI elements -->
       <div class="pv2-phone">
@@ -3266,7 +3247,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <div class="pv2-notif-name">Sarah from CA</div>
               <div class="pv2-notif-time">12s ago</div>
             </div>
-            <div class="pv2-notif-body">bought Handmade Candle Set — <span class="pv2-notif-price">$59</span></div>
+            <div class="pv2-notif-body">bought Notion Productivity OS — <span class="pv2-notif-price">$59</span></div>
           </div>
           <div class="pv2-notif">
             <div class="pv2-notif-row">
@@ -3275,6 +3256,30 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <div class="pv2-notif-time">38s ago</div>
             </div>
             <div class="pv2-notif-body">bought Self-Care Toolkit — <span class="pv2-notif-price">$49</span></div>
+          </div>
+          <div class="pv2-notif">
+            <div class="pv2-notif-row">
+              <div class="pv2-notif-dot">L</div>
+              <div class="pv2-notif-name">Lisa from TX</div>
+              <div class="pv2-notif-time">just now</div>
+            </div>
+            <div class="pv2-notif-body">bought Budget Planner Bundle — <span class="pv2-notif-price">$29</span></div>
+          </div>
+          <div class="pv2-notif">
+            <div class="pv2-notif-row">
+              <div class="pv2-notif-dot">R</div>
+              <div class="pv2-notif-name">Rachel from OR</div>
+              <div class="pv2-notif-time">22s ago</div>
+            </div>
+            <div class="pv2-notif-body">bought Resume Templates Pro — <span class="pv2-notif-price">$24</span></div>
+          </div>
+          <div class="pv2-notif">
+            <div class="pv2-notif-row">
+              <div class="pv2-notif-dot">J</div>
+              <div class="pv2-notif-name">Jamie from IL</div>
+              <div class="pv2-notif-time">47s ago</div>
+            </div>
+            <div class="pv2-notif-body">bought Healthy Meal Plan — <span class="pv2-notif-price">$29</span></div>
           </div>
         </div>
       </div>
