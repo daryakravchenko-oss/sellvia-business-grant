@@ -2300,6 +2300,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   transform-origin: center top;
   display: block;
 }
+/* Elisa (slide 0) – scaled down 28% proportionally, shifted 10px right */
+.hero--devin-v2 .sp-slide[data-idx="0"] .sp-photo img {
+  transform: scale(1.044) translate(7px, -100px);
+}
+/* Deanna (slide 1) – contain to show full image width, lifted 35px */
+.hero--devin-v2 .sp-slide[data-idx="1"] .sp-photo img {
+  object-fit: contain;
+  transform: translateY(-35px);
+}
+/* Lisa (slide 2) – image is already 1000x1500 (2:3), fits container natively */
+.hero--devin-v2 .sp-slide[data-idx="2"] .sp-photo img {
+  transform: none;
+}
 
 /* Winner pill – sits inside .sp-bottom, above the quote (green gradient) */
 .hero--devin-v2 .sp-winner-pill {
@@ -2541,13 +2554,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <div class="sp-slide sp-active" data-idx="0">
         <div class="sp-card">
-          <div class="sp-photo"><img src="img/social/p1.webp" alt="Marcus J., grant winner" loading="eager" decoding="async"></div>
+          <div class="sp-photo"><img src="img/social/elisa.webp" alt="Elisa B., grant winner" loading="eager" decoding="async"></div>
           <div class="sp-bottom">
             <span class="sp-winner-pill"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.39 6.96H22l-6.18 4.49L18.18 22 12 17.27 5.82 22l2.36-8.55L2 8.96h7.61z"/></svg>$5,000 Grant Winner</span>
-            <p class="sp-quote">"The grant unlocked premium ad credit and a personal manager — within two months my store was doing 3-4 sales a day."</p>
+            <p class="sp-quote">"It's a true honor to receive this award — it gives me the opportunity to grow my shop in the best possible way."</p>
             <div class="sp-divider"></div>
-            <div class="sp-name">Marcus J.</div>
-            <div class="sp-meta">Former teacher · Atlanta, US</div>
+            <div class="sp-name">Elisa B.</div>
+            <div class="sp-meta">Shop owner · Italy</div>
           </div>
           <!-- ORDER PLATES (temporarily hidden – may be moved to another section)
           <div class="sp-orders">
@@ -2561,13 +2574,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <div class="sp-slide" data-idx="1">
         <div class="sp-card">
-          <div class="sp-photo"><img src="img/social/p2.webp" alt="Mei L., grant winner" loading="lazy"></div>
+          <div class="sp-photo"><img src="img/social/deanna.webp" alt="Deanna R., grant winner" loading="lazy"></div>
           <div class="sp-bottom">
             <span class="sp-winner-pill"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.39 6.96H22l-6.18 4.49L18.18 22 12 17.27 5.82 22l2.36-8.55L2 8.96h7.61z"/></svg>$5,000 Grant Winner</span>
-            <p class="sp-quote">"With the grant I added a curated bestseller pack and unlocked the marketing tools — sales jumped 40% the very next month."</p>
+            <p class="sp-quote">"Winning this grant filled me with excitement — it reminded me that dedication and passion really do pay off."</p>
             <div class="sp-divider"></div>
-            <div class="sp-name">Mei L.</div>
-            <div class="sp-meta">Boutique owner · Portland, US</div>
+            <div class="sp-name">Deanna R.</div>
+            <div class="sp-meta">Shop owner · USA</div>
           </div>
           <!-- ORDER PLATES (temporarily hidden – may be moved to another section)
           <div class="sp-orders">
@@ -2581,13 +2594,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <div class="sp-slide" data-idx="2">
         <div class="sp-card">
-          <div class="sp-photo"><img src="img/social/p3.webp" alt="Priya S., grant winner" loading="lazy"></div>
+          <div class="sp-photo"><img src="img/social/lisa.webp" alt="Lisa B., grant winner" loading="lazy"></div>
           <div class="sp-bottom">
             <span class="sp-winner-pill"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.39 6.96H22l-6.18 4.49L18.18 22 12 17.27 5.82 22l2.36-8.55L2 8.96h7.61z"/></svg>$5,000 Grant Winner</span>
-            <p class="sp-quote">"I was juggling kids and a part-time job. The $5,000 helped me launch tools that run my store while I sleep."</p>
+            <p class="sp-quote">"Started as a side hustle — made sales on day one, and this grant gave me room to push toward real profit."</p>
             <div class="sp-divider"></div>
-            <div class="sp-name">Priya S.</div>
-            <div class="sp-meta">Mom of two · Houston, US</div>
+            <div class="sp-name">Lisa B.</div>
+            <div class="sp-meta">Side-hustle seller · USA</div>
           </div>
           <!-- ORDER PLATES (temporarily hidden – may be moved to another section)
           <div class="sp-orders">
@@ -2610,10 +2623,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="copy">
       <div class="limited">
         <span class="pulse"></span>
-        <span class="limited-text">LIMITED TIME ·<br class="m-only-br"> SMALL BUSINESS GRANT INCLUDED</span>
+        <span class="limited-text">LIMITED TIME ·<br class="m-only-br"> SMALL BUSINESS GRANT ACCESS</span>
       </div>
       <h1>
-        Get a <span class="blue">free online store</span> and win a <span class="amber">$5,000 Grant</span> on top.
+        Get a <span class="blue">free<br>online store</span><br>
+        and win a <span class="amber">$5,000<br>Business Grant</span>.
       </h1>
       <p class="lede">
         Get a ready-made store, products people actually want to buy, and a real
@@ -2621,14 +2635,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </p>
       <div class="actions">
         <a href="https://sellvia.com/checkout/?product=custom&type_custom=free_basic_hosting" class="cta">Get my free store + $5,000 Grant</a>
-        <button type="button" onclick="SellviaChat.open()" class="cta-link">
-          Get free consultation
-          <svg class="cta-link-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M8.91 19.92l6.52-6.52c.77-.77.77-2.03 0-2.8L8.91 4.08" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
       </div>
       <p class="cta-fine">Get started in less than 60 seconds • Cancel anytime</p>
+      <button type="button" onclick="SellviaChat.open()" class="cta-link" style="margin-top:14px">
+        Get free consultation
+        <svg class="cta-link-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M8.91 19.92l6.52-6.52c.77-.77.77-2.03 0-2.8L8.91 4.08" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
     </div>
   </div>
 
@@ -3739,7 +3753,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <svg class="bullet-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </li>
         <li class="bullet-item" data-panel="2">
-          <span class="bullet-text">Cutting-edge tools to elevate your store and profits</span>
+          <span class="bullet-text">Use cutting-edge tools to elevate your store and profits</span>
           <svg class="bullet-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </li>
       </ul>
@@ -3763,7 +3777,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="lcard float-a" style="width:190px;left:20px;bottom:108px">
           <span class="upg-pill upg-pill--live"><span class="upg-live-dot"></span>New order</span>
           <div style="display:flex;align-items:center;gap:10px;margin-top:10px">
-            <div class="upg-amount" style="margin:0">+104</div>
+            <div class="upg-amount" style="margin:0">+$104</div>
             <span class="upg-pill" style="padding:5px 9px">
               <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12l7-7 7 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </span>
@@ -3888,42 +3902,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 })();
 </script>
-<!-- ═══ HOW IT WORKS ═══ -->
-<section class="how-sec">
-  <div class="sec-in-wide" style="padding:0 24px">
-    <div class="appear" style="text-align:center">
-      <div class="sec-label">How it works</div>
-      <h2 class="sec-title-xl on-light">From zero<br class="m-only-br"> to a $5,000 grant<br>in 4 simple steps.</h2>
-      <p class="sec-body" style="max-width:540px;margin:0 auto">No experience, no tech skills, no inventory needed.</p>
-    </div>
-    <div class="how-steps">
-      <div class="how-step appear d1">
-        <div class="how-step-num">01</div>
-        <h3>We build your store</h3>
-        <p>Sign up free and we immediately set up a complete online store for you – loaded with digital products people actually buy. Your store is live in minutes, not months.</p>
-        <span class="how-step-tag">Instant access</span>
-      </div>
-      <div class="how-step appear d2">
-        <div class="how-step-num">02</div>
-        <h3>Activate your grant</h3>
-        <p>Your $40 ad credit, Google promotion gift, premium design and 1-on-1 training unlock the moment your store goes live. No setup, no fiddling.</p>
-        <span class="how-step-tag">Instant access</span>
-      </div>
-      <div class="how-step appear d3">
-        <div class="how-step-num">03</div>
-        <h3>Get paid, keep 60–70%</h3>
-        <p>When a customer buys from your store, you keep 60–70% of every sale as your profit. Products deliver instantly – no shipping, no hassle from your side.</p>
-        <span class="how-step-tag">Your profit</span>
-      </div>
-      <div class="how-step appear d4">
-        <div class="how-step-num">04</div>
-        <h3>Receive your $5,000 grant</h3>
-        <p>Auto-enrolled when your store goes live – no paperwork. Winners are announced monthly and funds land within 7 days.</p>
-        <span class="how-step-tag">Grant payout</span>
-      </div>
-    </div>
-  </div>
-</section>
+<!-- ═══ HOW IT WORKS – removed ═══ -->
 
 <!-- ═══ STORE DESIGNS MARQUEE ═══ -->
 <style>
