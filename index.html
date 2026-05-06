@@ -1461,7 +1461,7 @@ section { padding: 120px 24px; }
   max-width: var(--max);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(4,1fr);
+  grid-template-columns: repeat(3,1fr);
   gap: 0;
   border-radius: 20px;
   overflow: hidden;
@@ -1481,9 +1481,8 @@ section { padding: 120px 24px; }
 .rat-score { font-size: 56px; font-weight: 700; color: #fff; letter-spacing: -0.03em; }
 .rat-count { font-size: 17px; color: rgba(255,255,255,0.4); margin-top: 8px; }
 @media(max-width:680px) {
-  .ratings-inner { grid-template-columns: 1fr 1fr; }
-  .rat-card:nth-child(3) { border-left: none; }
-  .rat-card:nth-child(n+3) { border-top: 1px solid rgba(255,255,255,0.08); }
+  .ratings-inner { grid-template-columns: 1fr; }
+  .rat-card + .rat-card { border-left: none; border-top: 1px solid rgba(255,255,255,0.08); }
 }
 
 /* ════ TESTIMONIALS ════ */
@@ -2415,8 +2414,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 .hero--devin-v2 .copy { color: white; padding-right: 20px; position: relative; }
 .hero--devin-v2 .copy h1 {
   font-family: var(--font-sans); font-weight: 700;
-  font-size: clamp(48px, 5.6vw, 76px);
-  letter-spacing: -0.04em; line-height: 1.02;
+  font-size: clamp(40px, 5.0vw, 64px);
+  letter-spacing: -0.04em; line-height: 1.05;
   margin: 0 0 28px; color: #fff; text-wrap: balance;
 }
 .hero--devin-v2 .copy h1 .blue { color: #fff; font-weight: 700; }
@@ -2445,13 +2444,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
    .actions as a sibling — same pattern as the reference's hero-fine. */
 .hero--devin-v2 .actions {
   display: flex;
-  align-items: center;
-  gap: 26px;
-  /* No flex-wrap on desktop — the link sits to the right of the button on the same row */
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
 }
 .hero--devin-v2 .cta-fine {
   font-size: 13px;
-  color: #ffffff;
+  color: #86868b;
   letter-spacing: -0.005em;
   margin: 20px 0 0;
   width: 358px;
@@ -2478,10 +2477,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 .hero--devin-v2 .cta-link {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
   padding: 0;
   background: none;
   border: none;
+  width: 358px;
+  max-width: 100%;
   font-family: var(--font-sans);
   font-size: 17px;
   font-weight: 500;
@@ -2626,8 +2628,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <span class="limited-text">LIMITED TIME ·<br class="m-only-br"> SMALL BUSINESS GRANT ACCESS</span>
       </div>
       <h1>
-        Get a <span class="blue">free<br>online store</span><br>
-        and win a <span class="amber">$5,000<br>Business Grant</span>.
+        Get a <span class="blue">free</span><br>
+        <span class="blue">online store</span><br>
+        and win a<br>
+        <span class="amber">$5,000 Grant</span>.
       </h1>
       <p class="lede">
         Get a ready-made store, products people actually want to buy, and a real
@@ -4460,10 +4464,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </div>
   <div class="ratings-inner">
-    <div class="rat-card appear d1"><img class="rat-logo" src="img/ratings/sitejabber.svg" alt="Sitejabber" loading="lazy"><div class="rat-stars">★★★★★</div><div class="rat-score">4.8</div><div class="rat-count">824 reviews</div></div>
-    <div class="rat-card appear d2"><img class="rat-logo" src="img/ratings/trustpilot.svg" alt="Trustpilot" loading="lazy"><div class="rat-stars">★★★★★</div><div class="rat-score">4.6</div><div class="rat-count">1,115 reviews</div></div>
-    <div class="rat-card appear d3"><img class="rat-logo" src="img/ratings/facebook.svg" alt="Facebook" loading="lazy"><div class="rat-stars">★★★★★</div><div class="rat-score">96%</div><div class="rat-count">510 reviews</div></div>
-    <div class="rat-card appear d4"><img class="rat-logo" src="img/ratings/g2.svg" alt="G2" loading="lazy"><div class="rat-stars">★★★★★</div><div class="rat-score">4.7</div><div class="rat-count">249 reviews</div></div>
+    <div class="rat-card appear d1"><img class="rat-logo" src="img/ratings/sitejabber.svg" alt="Sitejabber" loading="lazy"><div class="rat-stars">★★★★★</div><div class="rat-score">4.8</div><div class="rat-count">924 reviews</div></div>
+    <div class="rat-card appear d2"><img class="rat-logo" src="img/ratings/facebook.svg" alt="Facebook" loading="lazy"><div class="rat-stars">★★★★★</div><div class="rat-score">96%</div><div class="rat-count">516 reviews</div></div>
+    <div class="rat-card appear d3"><img class="rat-logo" src="img/ratings/g2.svg" alt="G2" loading="lazy"><div class="rat-stars">★★★★★</div><div class="rat-score">4.8</div><div class="rat-count">249 reviews</div></div>
   </div>
 </div>
 
@@ -4600,7 +4603,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div>
         <div class="faq-cta appear d2">
           <h3>Claim your free store + $5,000 Business Grant.</h3>
-          <p>Chance to win a $5,000 grant for your business upgrade, plus seven done-for-you assets at no cost. Free 14-day trial.</p>
+          <p>Chance to win a $5,000 grant for your business upgrade. Free 14-day trial.</p>
           <a href="https://sellvia.com/checkout/?product=custom&type_custom=free_basic_hosting" class="btn btn-filled" style="height:60px;font-size:17px">Get my free store + $5,000 Grant</a>
           <p class="faq-cta-fine">Get started in less than 60 seconds • Cancel anytime</p>
           <div style="margin-top:20px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;gap:8px">
