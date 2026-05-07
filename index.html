@@ -683,7 +683,7 @@ button { cursor: pointer; font-family: var(--font); outline: none; border: none;
 /* ════ STAT BAR – continuous with hero (same #1d1d1f bg) ════ */
 .stat-bar { background: #1d1d1f; padding: 20px 24px 40px; }
 .stat-bar-inner {
-  max-width: var(--max);
+  max-width: var(--max-wide);
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -698,9 +698,12 @@ button { cursor: pointer; font-family: var(--font); outline: none; border: none;
   font-size: clamp(36px, 5vw, 56px);
   font-weight: 700;
   letter-spacing: -0.03em;
-  color: #ffffff;
+  color: #f5a623;
   line-height: 1;
-  display: block;
+  display: inline-block;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
 }
 .stat-l { font-size: 14px; color: var(--c-gray3); margin-top: 8px; display: block; }
 @media(max-width:600px){ .stat-bar-inner { grid-template-columns:1fr; } .stat-bar { padding: 56px 16px; } }
@@ -2698,19 +2701,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="stat-bar">
   <div class="stat-bar-inner">
     <div class="stat-item">
-      <span class="stat-n">1,500,000+</span>
+      <span class="stat-n" data-countup data-from="1000000" data-to="1500000" data-suffix="+" data-duration="1800">1,000,000</span>
       <span class="stat-l">Stores launched worldwide</span>
     </div>
     <div class="stat-item">
-      <span class="stat-n">$1.5B+</span>
+      <span class="stat-n" data-countup data-to="1.5" data-prefix="$" data-suffix="B+" data-decimals="1" data-duration="1800">$0</span>
       <span class="stat-l">Earned by store owners</span>
     </div>
     <div class="stat-item">
-      <span class="stat-n">300M+</span>
+      <span class="stat-n" data-countup data-to="300" data-suffix="M+" data-duration="1800">0</span>
       <span class="stat-l">Active buyers worldwide</span>
     </div>
     <div class="stat-item">
-      <span class="stat-n">4.8★</span>
+      <span class="stat-n" data-countup data-to="4.8" data-suffix="★" data-decimals="1" data-duration="1800">0</span>
       <span class="stat-l">Average customer rating</span>
     </div>
   </div>
@@ -4671,11 +4674,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     const prefix   = el.dataset.prefix  || '';
     const suffix   = el.dataset.suffix  || '';
 
-    // Special case: 1500 → displayed as "1,500,000+"
-    // suffix already contains ",000,000+" so we count 0→1500 and format without commas
-    const start = performance.now();
+    // Reserve horizontal space for the final value so the element doesn't
+    // resize as digits tick up. Synchronous measure → revert is invisible
+    // to the user (no paint until JS yields).
+    if (!el.dataset.widthReserved) {
+      const finalText = prefix + (decimals === 0
+        ? Math.round(to).toLocaleString('en-US')
+        : to.toFixed(decimals)) + suffix;
+      const initialText = el.textContent;
+      el.textContent = finalText;
+      el.style.minWidth = el.offsetWidth + 'px';
+      el.textContent = initialText;
+      el.dataset.widthReserved = '1';
+    }
+
+    // Capture start inside first tick — guarantees elapsed = 0 on first frame
+    // so the counter visibly begins from `from` (avoids first-frame jump on
+    // high-refresh displays / fast scheduling)
+    let start = null;
 
     function tick(now) {
+      if (start === null) start = now;
       const elapsed  = now - start;
       const progress = Math.min(elapsed / duration, 1);
       const eased    = easeOutQuad(progress);
